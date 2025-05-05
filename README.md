@@ -1,6 +1,6 @@
 # Pithy
 
-Pithy is a one-stop app for saving and searchinng pithy quotes. Sometimes we hear words or ideas that make us pause. Pithy is a place to save them for quick and easy access. 
+Pithy is a one-stop app for saving and searching pithy quotes. Sometimes we hear words or ideas that make us pause. Pithy is a place to save them for quick and easy access. 
 
 ## Features
 
