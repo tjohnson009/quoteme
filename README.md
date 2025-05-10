@@ -46,4 +46,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/b
 ## Cool New Things
 - A VSCode extension that automatically adds your project file tree to your README.md
 - The Concurrently Package: allows you to run multiple commands or scripts in a single terminal
+<br>
 ```   "dev:all": "concurrently \"npm run dev\" \"npm run server\"" ``` 
