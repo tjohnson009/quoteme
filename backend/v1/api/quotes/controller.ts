@@ -1,4 +1,5 @@
 // controller = handle the request and response; fetches data from the database and send it back
+import supabase from '../../../supabaseclient'; // Import the supabase client
 import { Request, Response } from 'express';
 import Quote from '../../models/quote.model'; // Import the Quote interface 
 
