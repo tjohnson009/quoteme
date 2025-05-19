@@ -1,7 +1,10 @@
+import dotenv from 'dotenv';
+dotenv.config(); // loads environment variables from .env file
 import { createClient } from '@supabase/supabase-js'; 
 
 const supabaseUrl = process.env.SUPABASE_URL; 
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
+// console.log(supabaseUrl, supabaseAnonKey);
 
 if (!supabaseUrl || !supabaseAnonKey) {
     throw new Error('Missing Supabase environment variables: SUPABASE_URL or SUPABASE_ANON_KEY');

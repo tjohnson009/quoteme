@@ -48,3 +48,94 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/b
 - The Concurrently Package: allows you to run multiple commands or scripts in a single terminal
 <br>
 ```   "dev:all": "concurrently \"npm run dev\" \"npm run server\"" ``` 
+
+
+```
+pithy
+├─ .next
+│  ├─ build-manifest.json
+│  ├─ cache
+│  │  ├─ .rscinfo
+│  │  ├─ swc
+│  │  │  └─ plugins
+│  │  │     └─ v7_macos_x86_64_9.0.0
+│  │  └─ webpack
+│  │     ├─ client-development
+│  │     │  ├─ 0.pack.gz
+│  │     │  ├─ 1.pack.gz
+│  │     │  ├─ 2.pack.gz
+│  │     │  ├─ 3.pack.gz
+│  │     │  ├─ 4.pack.gz
+│  │     │  ├─ 5.pack.gz
+│  │     │  ├─ 6.pack.gz
+│  │     │  ├─ 7.pack.gz
+│  │     │  ├─ 8.pack.gz
+│  │     │  ├─ index.pack.gz
+│  │     │  └─ index.pack.gz.old
+│  │     └─ server-development
+│  │        ├─ 0.pack.gz
+│  │        ├─ 1.pack.gz
+│  │        ├─ 2.pack.gz
+│  │        ├─ 3.pack.gz
+│  │        ├─ 4.pack.gz
+│  │        ├─ 5.pack.gz
+│  │        ├─ 6.pack.gz
+│  │        ├─ index.pack.gz
+│  │        └─ index.pack.gz.old
+│  ├─ package.json
+│  ├─ react-loadable-manifest.json
+│  ├─ server
+│  │  ├─ interception-route-rewrite-manifest.js
+│  │  ├─ middleware-build-manifest.js
+│  │  ├─ middleware-manifest.json
+│  │  ├─ middleware-react-loadable-manifest.js
+│  │  ├─ next-font-manifest.js
+│  │  ├─ next-font-manifest.json
+│  │  └─ pages-manifest.json
+│  ├─ static
+│  │  ├─ chunks
+│  │  │  └─ polyfills.js
+│  │  └─ development
+│  │     ├─ _buildManifest.js
+│  │     └─ _ssgManifest.js
+│  └─ trace
+├─ README.md
+├─ backend
+│  ├─ supabaseclient.ts
+│  └─ v1
+│     ├─ api
+│     │  ├─ quotes
+│     │  │  ├─ controller.ts
+│     │  │  ├─ model.ts
+│     │  │  └─ routes.ts
+│     │  └─ users
+│     │     ├─ controller.ts
+│     │     ├─ model.ts
+│     │     └─ routes.ts
+│     ├─ models
+│     │  ├─ quote.model.ts
+│     │  └─ user.model.ts
+│     └─ server.ts
+├─ eslint.config.mjs
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ favicon.ico
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ randomNotesGovTech.txt
+├─ src
+│  ├─ pages
+│  │  ├─ _app.tsx
+│  │  ├─ _document.tsx
+│  │  └─ index.tsx
+│  └─ styles
+│     └─ globals.css
+└─ tsconfig.json
+
+```

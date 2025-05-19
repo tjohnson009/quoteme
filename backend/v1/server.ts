@@ -2,7 +2,7 @@
 //routes.ts defines what should happen when specific URLs are hit.
 //controller.ts holds the function that actually runs when those routes are hit.
 //model.ts is used if you need to hit a database.
-
+// import dotenv from 'dotenv'; // loads environment variables from .env file 
 import express from 'express'; 
 import path from 'path';
 import cors from 'cors'; // allows frontend to access / talk to backend
@@ -12,7 +12,7 @@ import quotesRouter from './api/quotes/routes'; // this is the router for the qu
 
 
 // // import Home from '../../src/pages/index'; // this is a page from the frontend, therefore it is not a good idea to import it here
-
+// dotenv.config(); // loads environment variables from .env file 
 const app = express();
 const port: number = 5000; 
 

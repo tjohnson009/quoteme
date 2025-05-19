@@ -3,6 +3,21 @@ import supabase from '../../../supabaseclient'; // Import the supabase client
 import { Request, Response } from 'express';
 import Quote from '../../models/quote.model'; // Import the Quote interface 
 
+//--------
+async function testSupabaseConnection(req: Request, res: Response) {
+  const { data, error } = await supabase
+    .from('saved-quotes')
+    .select('id') // just select a lightweight column
+
+  if (error) {
+    console.error('Supabase error:', error);
+    res.status(500).json({ error: 'Supabase connection failed...' });
+  }
+
+  res.status(200).json({ message: '✅ Supabase connected successfully!', data });
+}
+//--------
+
 function getQuotes(req: Request, res: Response): void {
     const sampleQuotes = [
         { id: 1, quote: "The only way to do great work is to love what you do." },
@@ -56,4 +71,4 @@ function deleteQuote(req: Request, res: Response): void {
 
 // function editQuote
 
-export { getQuotes, createQuote, deleteQuote }; 
+export { getQuotes, createQuote, deleteQuote, testSupabaseConnection }; 
