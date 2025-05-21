@@ -4,19 +4,22 @@ import { Request, Response } from 'express';
 import Quote from '../../models/quote.model'; // Import the Quote interface 
 
 //--------
-async function testSupabaseConnection(req: Request, res: Response) {
-  const { data, error } = await supabase
-    .from('saved-quotes')
-    .select('id') // just select a lightweight column
+// async function testSupabaseConnection(req: Request, res: Response) {
+//   const { data, error } = await supabase
+//     .from('saved-quotes')
+//     .select('id') // just select a lightweight column
 
-  if (error) {
-    console.error('Supabase error:', error);
-    res.status(500).json({ error: 'Supabase connection failed...' });
-  }
+//   if (error) {
+//     console.error('Supabase error:', error);
+//     res.status(500).json({ error: 'Supabase connection failed...' });
+//   }
 
-  res.status(200).json({ message: '✅ Supabase connected successfully!', data });
-}
+//   res.status(200).json({ message: '✅ Supabase connected successfully!', data });
+// }
 //--------
+
+function postmanTester(req: Request, res: Response): void {
+    }
 
 function getQuotes(req: Request, res: Response): void {
     const sampleQuotes = [
@@ -30,28 +33,42 @@ function getQuotes(req: Request, res: Response): void {
      res.json(sampleQuotes);
 }
 
-function createQuote(req: Request, res: Response): void {
-if (!req.body.text) {
-     res.status(400).json({error: 'Quote text is not present.'}); 
-     return; 
+async function createQuote(req: Request, res: Response): Promise<void> {
+    const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+        email: 'tikimantim@gmail.com',
+        password: 'girlshakethatlaffytaffy123@',
+      });
+
+const token = req.headers.authorization?.replace('Bearer ', ''); 
+const { data: userData, error: userError } = await supabase.auth.getUser(token); 
+console.log(userData); 
+
+if (!userData) {
+    res.status(400).json({ "error": `${userError}` });
+    return; 
 }
 
-if (!req.body.author) {
-    req.body.author = 'Unknown'; // default  
+ const { data: insertedData, error: insertError } = await supabase.from('saved_quotes').insert([
+    {
+        user_id: userData.user?.id, 
+        text: req.body.text, 
+        author: req.body.author ? req.body.author : 'Unknown',
+        tags: req.body.tags || [], 
+        notes: req.body.notes || ''
+    }
+]
+); 
+
+console.log('Inserted data:', insertedData); 
+
+if (insertError) {
+    res.status(500).json({ insertError, 
+        // "message": `${insertError.message}`
+     });
 }
 
-    const newQuote: Quote = {
-        id: Math.floor(Math.random() * 1000), // random id
-        createdAt: new Date(), // current date  
-        author: req.body.author, 
-        text: req.body.text,
-        // text: '',
-        tags: ['sad', 'happy']  
-    };
-
-    // sampleQuotes.push(newQuote); 
-    // console.log(newQuote); 
-     res.status(201).json(newQuote); 
+res.json({insertedData, insertError}); 
+// console.log(token);
 
 }
 
@@ -71,4 +88,9 @@ function deleteQuote(req: Request, res: Response): void {
 
 // function editQuote
 
-export { getQuotes, createQuote, deleteQuote, testSupabaseConnection }; 
+export { getQuotes, 
+    createQuote, 
+    deleteQuote, 
+    postmanTester,
+    // testSupabaseConnection 
+}; 

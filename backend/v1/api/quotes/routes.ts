@@ -1,12 +1,16 @@
 // Routes = URL + HTTP verb + which function to run
 import express from 'express';  
 import { getQuotes, createQuote, deleteQuote } from './controller'; 
-import { testSupabaseConnection } from './controller'; // Import the test connection function 
+import { 
+    // testSupabaseConnection, 
+    postmanTester } from './controller'; // Import the test connection function 
 // import {createQuote} from './controller';  
 
 const router = express.Router(); 
 
-router.get('/supabase-test', testSupabaseConnection)
+// router.get('/supabase-test', testSupabaseConnection); 
+
+router.get('/postman-test', postmanTester); 
 
 router.get('/', getQuotes); // when the user hits /v1/api/quotes, run the getQuotes function 
 
