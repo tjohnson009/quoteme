@@ -1,5 +1,5 @@
 // controller = handle the request and response; fetches data from the database and send it back
-import supabase from '../../../supabaseclient'; // Import the supabase client
+import createSupabaseClient from '../../../supabaseclient'; // Import the supabase client
 import { Request, Response } from 'express';
 import Quote from '../../models/quote.model'; // Import the Quote interface 
 
@@ -34,12 +34,14 @@ function getQuotes(req: Request, res: Response): void {
 }
 
 async function createQuote(req: Request, res: Response): Promise<void> {
-    const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
-        email: 'tikimantim@gmail.com',
-        password: 'girlshakethatlaffytaffy123@',
-      });
+    const supabase = createSupabaseClient(req); // Create a new Supabase client instance
+    const token = req.headers.authorization?.replace('Bearer ', ''); 
 
-const token = req.headers.authorization?.replace('Bearer ', ''); 
+    // const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+    //     email: 'tikimantim@gmail.com',
+    //     password: '<insert>',
+    //   });
+
 const { data: userData, error: userError } = await supabase.auth.getUser(token); 
 console.log(userData); 
 
@@ -57,7 +59,7 @@ if (!userData) {
         notes: req.body.notes || ''
     }
 ]
-); 
+).select(); 
 
 console.log('Inserted data:', insertedData); 
 
