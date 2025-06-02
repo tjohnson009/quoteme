@@ -34,44 +34,50 @@ function getQuotes(req: Request, res: Response): void {
 }
 
 async function createQuote(req: Request, res: Response): Promise<void> {
-    const supabase = createSupabaseClient(req); // Create a new Supabase client instance
-    const token = req.headers.authorization?.replace('Bearer ', ''); 
+    try {
+        const supabase = createSupabaseClient(req); // Create a new Supabase client instance
+        const token = req.headers.authorization?.replace('Bearer ', ''); 
+        
+        // const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+            //     email: 'tikimantim@gmail.com',
+            //     password: '<insert>',
+            //   });
 
-    // const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
-    //     email: 'tikimantim@gmail.com',
-    //     password: '<insert>',
-    //   });
-
-const { data: userData, error: userError } = await supabase.auth.getUser(token); 
-console.log(userData); 
-
-if (!userData) {
-    res.status(400).json({ "error": `${userError}` });
-    return; 
-}
-
- const { data: insertedData, error: insertError } = await supabase.from('saved_quotes').insert([
-    {
-        user_id: userData.user?.id, 
-        text: req.body.text, 
-        author: req.body.author ? req.body.author : 'Unknown',
-        tags: req.body.tags || [], 
-        notes: req.body.notes || ''
+            const { data: userToken, error: userError } = await supabase.auth.getUser(token); 
+            console.log(userToken); 
+            
+            if (!userToken || !userToken.user) {
+                res.status(401).json({ "error": userError || "User toklen not found." });
+                return; 
+            }
+            
+    const { data: insertedData, error: insertError } = await supabase.from('saved_quotes').insert([
+                {
+                    user_id: userToken.user.id, 
+                    text: req.body.text, 
+                    author: req.body.author ? req.body.author : 'Unknown',
+                    tags: req.body.tags || [], 
+                    notes: req.body.notes || ''
+                }
+            ]
+        ).select(); 
+        
+        console.log('Inserted data:', insertedData); 
+        
+        if (insertError) {
+            res.status(500).json({ "error": insertError, 
+                // "message": `${insertError.message}`
+            });
+            return; 
+        }
+        
+        res.status(201).json({insertedData}); 
+        // console.log(token);
+    } catch(error) {
+        console.error('Error creating quote:', error);
+        res.status(500).json({ error: 'Failed to create quote.' });
     }
-]
-).select(); 
-
-console.log('Inserted data:', insertedData); 
-
-if (insertError) {
-    res.status(500).json({ insertError, 
-        // "message": `${insertError.message}`
-     });
-}
-
-res.json({insertedData, insertError}); 
-// console.log(token);
-
+        
 }
 
 function deleteQuote(req: Request, res: Response): void { 
