@@ -1,6 +1,7 @@
 // controller = handle the request and response; fetches data from the database and send it back
 import createSupabaseClient from '../../../supabaseclient'; // Import the supabase client
 import { Request, Response } from 'express';
+import { getUserAndClient } from '../helpers/getUserAndClient.ts'; 
 // import Quote from '../../models/quote.model'; // Import the Quote interface 
 
 //--------
@@ -21,19 +22,14 @@ import { Request, Response } from 'express';
 // function postmanTester(req: Request, res: Response): void {
 //     }
 
+// async function getUserAndToken() {
+//     const supabase = createSupabaseClient(req); // Create a new Supabase client instance 
+//     const token = req.headers.authorization?.replace('Bearer ', '');
+// }
+
 async function getQuotes(req: Request, res: Response): Promise<void> {
     try {
-   const supabase = createSupabaseClient(req); // Create a new Supabase client instance 
-   const token = req.headers.authorization?.replace('Bearer ', ''); 
-
-   const { data: userData, error: userError } = await supabase.auth.getUser(token); 
-
-    if (!userData || !userData.user) { 
-        res.status(401).json({ error: userError || "User token not found." });
-        return; 
-    }
-
-    // const userId = userData.user.id; 
+    const { supabase } = await getUserAndClient(req, res); // Get the user and supabase client
 
     const {data: userSavedQuotes, error: quotesError} = await supabase
         .from('saved_quotes')
@@ -56,27 +52,38 @@ async function getQuotes(req: Request, res: Response): Promise<void> {
     }
 }
 
+function deleteQuote(req: Request, res: Response): void { 
+    const quoteID = parseInt(req.params.id); 
+    // const quoteID = req.query.id;  
+    console.log(quoteID);
+    if (quoteID) {
+        res.status(200).json({message: `Quote with ID ${quoteID} deleted.`}); 
+        console.log(`Quote with ID ${quoteID} deleted.`);   
+    } else {
+        res.status(400).json({error: 'Quote ID is not valid.'}); 
+        console.log('Quote ID is not valid.');
+        return; 
+    }
+}
+
 async function createQuote(req: Request, res: Response): Promise<void> {
     try {
-        const supabase = createSupabaseClient(req); // Create a new Supabase client instance
-        const token = req.headers.authorization?.replace('Bearer ', ''); 
-        
-        // const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
-            //     email: 'tikimantim@gmail.com',
-            //     password: '<insert>',
-            //   });
+        // const supabase = createSupabaseClient(req); // Create a new Supabase client instance
+        // const token = req.headers.authorization?.replace('Bearer ', ''); 
 
-            const { data: userData, error: userError } = await supabase.auth.getUser(token); 
-            console.log(userData); 
+        // const { data: userData, error: userError } = await supabase.auth.getUser(token); 
             
-            if (!userData || !userData.user) {
-                res.status(401).json({ "error": userError || "User toklen not found." });
-                return; 
-            }
+        //     if (!userData || !userData.user) {
+        //         res.status(401).json({ "error": userError || "User toklen not found." });
+        //         return; 
+        //     }
+
+    const { supabase, userID } = await getUserAndClient(req, res); // Get the user and supabase client 
             
     const { data: insertedData, error: insertError } = await supabase.from('saved_quotes').insert([
                 {
-                    user_id: userData.user.id, 
+                    // user_id: userData.user.id, 
+                    user_id: userID, 
                     text: req.body.text, 
                     author: req.body.author ? req.body.author : 'Unknown',
                     tags: req.body.tags || [], 
@@ -103,25 +110,20 @@ async function createQuote(req: Request, res: Response): Promise<void> {
         
 }
 
-function deleteQuote(req: Request, res: Response): void { 
-    const quoteID = parseInt(req.params.id); 
-    // const quoteID = req.query.id;  
-    console.log(quoteID);
-    if (quoteID) {
-        res.status(200).json({message: `Quote with ID ${quoteID} deleted.`}); 
-        console.log(`Quote with ID ${quoteID} deleted.`);   
-    } else {
-        res.status(400).json({error: 'Quote ID is not valid.'}); 
-        console.log('Quote ID is not valid.');
-        return; 
+// function editQuote
+async function editQuote(req: Request, res: Response): Promise<void> {
+    try {
+
+    } catch(error) {
+
     }
 }
 
-// function editQuote
 
 export { getQuotes, 
     createQuote, 
     deleteQuote, 
+    editQuote, 
     // postmanTester,
     // testSupabaseConnection 
 }; 
