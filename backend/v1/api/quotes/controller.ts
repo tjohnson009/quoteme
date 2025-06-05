@@ -1,5 +1,5 @@
 // controller = handle the request and response; fetches data from the database and send it back
-import createSupabaseClient from '../../../supabaseclient'; // Import the supabase client
+// import createSupabaseClient from '../../../supabaseclient'; // Import the supabase client
 import { Request, Response } from 'express';
 import { getUserAndClient } from '../helpers/getUserAndClient.ts'; 
 // import Quote from '../../models/quote.model'; // Import the Quote interface 
@@ -18,14 +18,8 @@ import { getUserAndClient } from '../helpers/getUserAndClient.ts';
 //   res.status(200).json({ message: '✅ Supabase connected successfully!', data });
 // }
 //--------
-
 // function postmanTester(req: Request, res: Response): void {
 //     }
-
-// async function getUserAndToken() {
-//     const supabase = createSupabaseClient(req); // Create a new Supabase client instance 
-//     const token = req.headers.authorization?.replace('Bearer ', '');
-// }
 
 async function getQuotes(req: Request, res: Response): Promise<void> {
     try {
@@ -110,12 +104,44 @@ async function createQuote(req: Request, res: Response): Promise<void> {
         
 }
 
-// function editQuote
 async function editQuote(req: Request, res: Response): Promise<void> {
     try {
+        const { supabase, userID } = await getUserAndClient(req, res);
+        const editedQuoteID = parseInt(req.params.id);  
+
+        if (!editedQuoteID) {
+            res.status(400).json({ error: 'Invalid quote ID.' });
+            return; 
+        }
+
+        // const { text, author, tags, notes} = req.body; 
+        const updatedFields: { [key: string]: string } = {}; 
+        const potentialUpdatedFields = ['text', 'author', 'tags', 'notes'];
+        
+        for (const field of potentialUpdatedFields) {
+            if (req.body[field] !== undefined && req.body[field] !== null) {
+                updatedFields[field] = req.body[field]; 
+            }
+        }
+
+        const { data: updatedData, error: updateError } = await supabase
+            .from('saved_quotes')
+            .update(updatedFields)
+            .eq('user_id', userID) // ensures only updating logged in user's quote - should be covered by RLS but this is an extra check - trust but verify! 
+            .eq('id', editedQuoteID) // Ensure we are updating the correct quote
+            .select(); 
+
+        if (updateError) {
+            console.error('Error updating quote:', updateError);
+            res.status(500).json({ error: updateError.message });
+            return; 
+        } 
+
+        res.status(200).json({ updatedData });
 
     } catch(error) {
-
+        console.error('Error in editQuote:', error);
+        res.status(500).json({ error: 'Failed to edit quote.' });
     }
 }
 
