@@ -46,32 +46,40 @@ async function getQuotes(req: Request, res: Response): Promise<void> {
     }
 }
 
-function deleteQuote(req: Request, res: Response): void { 
-    const quoteID = parseInt(req.params.id); 
-    // const quoteID = req.query.id;  
-    console.log(quoteID);
-    if (quoteID) {
-        res.status(200).json({message: `Quote with ID ${quoteID} deleted.`}); 
-        console.log(`Quote with ID ${quoteID} deleted.`);   
-    } else {
-        res.status(400).json({error: 'Quote ID is not valid.'}); 
-        console.log('Quote ID is not valid.');
-        return; 
+ async function deleteQuote(req: Request, res: Response): Promise<void> { 
+    try {
+        const { supabase, userID } = await getUserAndClient(req, res);
+        const deletedQuoteID = parseInt(req.params.id);  
+
+        if (!deletedQuoteID || isNaN(deletedQuoteID)) {
+            console.error('Invalid quote ID:', deletedQuoteID); 
+            res.status(400).json({ error: 'Invalid quote ID selected for deletion.' });
+            return; 
+        }
+
+        const { data: deletedQuoteData, error: deletionError } = await supabase
+            .from('saved_quotes')
+            .delete()
+            .eq('user_id', userID) // ensures only updating logged in user's quote - should be covered by RLS but this is an extra check - trust but verify! 
+            .eq('id', deletedQuoteID) // Ensure we are updating the correct quote
+            .select(); 
+
+        if (deletionError) {
+            console.error(`Error deleting quote # ${deletedQuoteID}:`, deletionError);
+            res.status(500).json({ error: deletionError.message });
+            return; 
+        } 
+
+        res.status(200).json({ message: `Quote #${deletedQuoteID} successfully deleted`, deletedQuoteData});
+
+    } catch(error) {
+        console.error('Error in deleteQuote:', error);
+        res.status(500).json({ error: 'Failed to delete quote.' });
     }
 }
 
 async function createQuote(req: Request, res: Response): Promise<void> {
     try {
-        // const supabase = createSupabaseClient(req); // Create a new Supabase client instance
-        // const token = req.headers.authorization?.replace('Bearer ', ''); 
-
-        // const { data: userData, error: userError } = await supabase.auth.getUser(token); 
-            
-        //     if (!userData || !userData.user) {
-        //         res.status(401).json({ "error": userError || "User toklen not found." });
-        //         return; 
-        //     }
-
     const { supabase, userID } = await getUserAndClient(req, res); // Get the user and supabase client 
             
     const { data: insertedData, error: insertError } = await supabase.from('saved_quotes').insert([
@@ -109,7 +117,8 @@ async function editQuote(req: Request, res: Response): Promise<void> {
         const { supabase, userID } = await getUserAndClient(req, res);
         const editedQuoteID = parseInt(req.params.id);  
 
-        if (!editedQuoteID) {
+        if (!editedQuoteID || isNaN(editedQuoteID)) {
+            console.error('Invalid quote ID:', editedQuoteID);
             res.status(400).json({ error: 'Invalid quote ID.' });
             return; 
         }
