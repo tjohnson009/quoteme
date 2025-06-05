@@ -70,6 +70,11 @@ async function getQuotes(req: Request, res: Response): Promise<void> {
             return; 
         } 
 
+        if (deletedQuoteData.length === 0) {
+            res.status(404).json({ error: `No quote found with ID #${deletedQuoteID} for this user.` });
+                return;
+        }
+
         res.status(200).json({ message: `Quote #${deletedQuoteID} successfully deleted`, deletedQuoteData});
 
     } catch(error) {
