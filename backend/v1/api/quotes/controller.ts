@@ -151,6 +151,11 @@ async function editQuote(req: Request, res: Response): Promise<void> {
             return; 
         } 
 
+        if (!updatedData || updatedData.length === 0) {
+            res.status(404).json({ error: `No quote found with ID #${editedQuoteID} for this user.` });
+            return;
+        }
+
         res.status(200).json({ updatedData });
 
     } catch(error) {
