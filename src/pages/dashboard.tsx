@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import {logout} from '@/services/auth'; // proxy logout function
+import { log } from 'console';
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
@@ -23,6 +25,11 @@ export default function Dashboard() {
     <main className="min-h-screen flex flex-col items-center justify-center">
       <h1 className="text-2xl font-semibold">Welcome to QuoteMe 🎉</h1>
       <p className="mt-2 text-gray-600">You are successfully signed in.</p>
+<br></br>
+<button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        onClick={() => {
+            logout().then(() => {})}}
+            >Logout</button>
     </main>
   );
 }

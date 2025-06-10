@@ -1,5 +1,6 @@
 import React from "react";
 import { Geist, Geist_Mono } from "next/font/google";
+import Button from "@/components/Button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +21,16 @@ export default function Home() {
          QuoteMe
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
-          This is where my buttons can go. 
+          <Button
+          onClick={() => {
+            window.location.href = "/login";
+          }}
+          >Log In</Button>
+          <Button
+          onClick={() => {
+            window.location.href = "/signup";
+          }}
+          >Sign Up</Button>
         </div>
       </main>
     </div>
