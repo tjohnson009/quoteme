@@ -5,6 +5,7 @@
 // import dotenv from 'dotenv'; // loads environment variables from .env file 
 import express from 'express'; 
 import path from 'path';
+import authRouter from './api/routes/auth'; 
 import cors from 'cors'; // allows frontend to access / talk to backend
 
 import quotesRouter from './api/quotes/routes'; // this is the router for the quotes API 
@@ -26,7 +27,9 @@ app.get('/', (req, res) => {
     res.send('Coming at you live from the backend!');
 });
 
+
 app.use('/v1/api/quotes', quotesRouter); 
+app.use('/v1/api/auth', authRouter); 
 // app.use('/v1/api/users', usersRouter); 
 
 app.listen(port, () => {

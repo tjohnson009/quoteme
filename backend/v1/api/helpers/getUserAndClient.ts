@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { SupabaseClient } from '@supabase/supabase-js'; 
-import createSupabaseClient from '../../../supabaseclient.ts'; // Adjust the import path as necessary 
+import { createSupabaseClient } from '../../../supabaseclient.ts'; // Adjust the import path as necessary 
 
 export async function getUserAndClient(req: Request, res: Response): Promise<{ supabase: SupabaseClient; userID: string; }> {
 

@@ -5,13 +5,13 @@ import { Request } from 'express';
 
 const supabaseUrl = process.env.SUPABASE_URL; 
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
-// console.log(supabaseUrl, supabaseAnonKey);
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-// if (!supabaseUrl || !supabaseAnonKey) {
-//     throw new Error('Missing Supabase environment variables: SUPABASE_URL or SUPABASE_ANON_KEY');
-// }
+// for signup/login
+export const supabase = createClient(supabaseUrl!, supabaseServiceRoleKey!); 
 
-function createSupabaseClient(req: Request): SupabaseClient {
+// TOKEN based client (for authenticated requests only)
+export function createSupabaseClient(req: Request): SupabaseClient {
     if (!supabaseUrl || !supabaseAnonKey) {
         throw new Error('Missing Supabase environment variables: SUPABASE_URL or SUPABASE_ANON_KEY');
     }
@@ -41,4 +41,4 @@ function createSupabaseClient(req: Request): SupabaseClient {
 // }); 
 
 // export default supabase; 
-export default createSupabaseClient; 
+// export { createSupabaseClient }; 
