@@ -14,7 +14,7 @@ if (data.session?.access_token) {
 }
 
   if (!res.ok) throw new Error(data.error || 'Login failed');
-  return data;
+  return data; 
 }
 
 export async function signup(email: string, password: string) {

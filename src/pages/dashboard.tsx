@@ -8,10 +8,10 @@ export default function Dashboard() {
   const [authorized, setAuthorized] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
+  useEffect(() => { 
     const token = localStorage.getItem('token'); // ← use a better method later, for now quick
     if (!token) {
-      router.push('/login');
+      router.push('/');
     } else {
       setAuthorized(true);
       setLoading(false);
@@ -23,7 +23,7 @@ export default function Dashboard() {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-semibold">Welcome to QuoteMe 🎉</h1>
+      <h1 className="text-2xl font-semibold">Welcome to QuoteMe</h1>
       <p className="mt-2 text-gray-600">You are successfully signed in.</p>
 <br></br>
 <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
