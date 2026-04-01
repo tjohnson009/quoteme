@@ -9,6 +9,7 @@ interface AuthFormProps {
     // onSubmit: (e: FormEvent) => void;
     submitLabel?: string;
     linkText?: string;
+    className?: string
 }
 
 // const AuthForm: React.FC<AuthFormProps> = ({
@@ -75,6 +76,7 @@ interface AuthFormProps {
 const AuthForm: React.FC<AuthFormProps> = ({
     onLogin,
     onSignup,
+    className
     // linkText = 'Forgot Password?',  
 }) => {
 const [email, setEmail] = useState('');
@@ -103,9 +105,9 @@ const handleSubmit = async (e: FormEvent) => {
 };
 
 return (
-   <form onSubmit={handleSubmit} className="max-w-[320px] mx-auto">
+   <form onSubmit={handleSubmit} className={className ? className : ""}>
             {error && <div className="text-red-500 mb-2">{error}</div>}
-            <h2 className='"text-xl font-bold mb-4"'>
+            <h2 className="text-xl font-bold mb-4 mx-auto">
                 {mode === 'login' ? 'Log Into QuoteMe' : 'Create An Account'}</h2>
             <div className="mb-3">
                 <label className="block">
@@ -142,7 +144,6 @@ return (
             <Button // submit form button
                 type="submit" 
                 disabled={isLoading} 
-                className="w-full py-2.5 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
             >
                 {isLoading ? 'Loading...' : 'Submit'}
             </Button>

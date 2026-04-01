@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { email, password } = req.body;
 
   try {
-    const expressResponse = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_API}/api/auth/signup`, {
+    const expressResponse = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_API}/v1/api/auth/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),

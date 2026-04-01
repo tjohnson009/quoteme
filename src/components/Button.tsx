@@ -6,7 +6,6 @@ interface ButtonProps {
     disabled?: boolean;
     onClick?: () => void;
     type?: 'button' | 'submit' | 'reset';
-    className?: string; 
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -16,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
     disabled = false,
     onClick,
 }) => {
-    const baseStyles = 'rounded-md font-medium transition-colors duration-200 cursor-pointer';
+    const baseStyles = 'w-3/4 mx-auto cursor-pointer bg-blue-500 rounded p-2.5';
     
     // const variants = {
     //     primary: 'bg-blue-600 text-white hover:bg-blue-700',
@@ -32,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
 
     return (
         <button
-            className={`${baseStyles} ${
+            className={` ${baseStyles} ${
                 disabled ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             onClick={onClick}

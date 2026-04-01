@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import {logout} from '@/services/auth'; // proxy logout function
 import { log } from 'console';
+import Button from '@/components/Button';
+import Navbar from '@/components/Navbar'; 
+import Footer from '@/components/Footer';
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
@@ -17,19 +20,16 @@ export default function Dashboard() {
       setLoading(false);
     }
   }, []);
-
+  
   if (loading) return <p>Loading...</p>;
   if (!authorized) return null;
+  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : ''; 
 
-  return (
-    <main className="min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-semibold">Welcome to QuoteMe</h1>
-      <p className="mt-2 text-gray-600">You are successfully signed in.</p>
-<br></br>
-<button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        onClick={() => {
-            logout().then(() => {})}}
-            >Logout</button>
+  return ( 
+    <>
+    <main className="min-h-screen">
+      <p className="my-2 w-full mx-auto text-sm text-center text-gray-600">You do not have any quotes saved {user ? user.email : 'Guest'}!</p>
     </main>
+    </>
   );
 }
