@@ -1,22 +1,24 @@
 import React from "react";
-import { Geist, Geist_Mono } from "next/font/google";
+// import { Geist, Geist_Mono } from "next/font/google";
 import {login} from "@/services/auth"; 
 import  {signup}  from "@/services/auth"; 
 import { useRouter } from "next/router"; 
 // import Button from "@/components/Button";
 import AuthForm from "@/components/AuthForm";
+import Footer from "@/components/Footer"; 
+import Navbar from "@/components/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
-export default function Home() {
+export default function SignUpLoginPage() {
   const router = useRouter(); 
 
 const handleLogin = async(email: string, password: string) => {
@@ -43,27 +45,18 @@ catch (error) {
 }
 
   return (
-    <div className={`${geistSans.className} ${geistMono.className} grid border-1 border-solid border-red-500 items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-[32px] max-w-1/2 row-start-2 items-center sm:items-start border-blue-500 border-1">
-         QuoteMe
+    // <div className={`grid border-1 border-solid border-red-500 items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20`}
+    // >
+    <>
+      <main className="py-2 gap-[1/4] w-full items-center m-0 mx-auto sm:items-start border-blue-500 border-1">
+         <p className="mt-2">QuoteMe</p>
     <AuthForm
       onLogin={handleLogin}
       onSignup={handleSignup}
-    ></AuthForm>
-        {/* <div className="flex gap-4 items-center flex-col sm:flex-row"> */}
-          {/* <Button
-          onClick={() => {
-            // window.location.href = "/login";
-          }}
-          >Log In</Button>
-          <Button
-          onClick={() => {
-            // window.location.href = "/signup";
-          }}
-          >Sign Up</Button> */}
-        {/* </div> */}
+      className="max-w-[320px] w-3/4 mx-auto flex flex-col gap-[2vh] my-2"
+       ></AuthForm>
       </main>
-    </div>
+      </>
+    // </div>
   );
 }

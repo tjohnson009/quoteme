@@ -12,7 +12,7 @@ import quotesRouter from './api/quotes/routes'; // this is the router for the qu
 // import usersRouter from './api/users/routes'; // this is the router for the users API
 
 
-// // import Home from '../../src/pages/index'; // this is a page from the frontend, therefore it is not a good idea to import it here
+// // import SignUpLoginPage from '../../src/pages/index'; // this is a page from the frontend, therefore it is not a good idea to import it here
 // dotenv.config(); // loads environment variables from .env file 
 const app = express();
 const port: number = 5000; 
