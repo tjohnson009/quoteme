@@ -38,6 +38,5 @@ export async function signup(email: string, password: string) {
 export function logout() {
   localStorage.removeItem('token'); 
   localStorage.removeItem('user'); 
-  return fetch('/api/auth/login', { // return to the login page
-  });
+  window.location.href = "/"
 }
