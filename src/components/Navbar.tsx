@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { logout } from '@/services/auth'
 
 interface NavbarProps {
-    // onLogout: () => void;
+    
 }
 
 const Navbar: React.FC<NavbarProps> = () => {
@@ -39,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                     className="block w-full px-4 py-3 bg-transparent border-none text-left cursor-pointer text-red-600 hover:bg-gray-100"
                     onClick={() => {
                     setDropdownOpen(false);
-                    // onLogout();
+                    logout()
                     }}
                     type="button"
                 >

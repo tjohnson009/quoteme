@@ -14,6 +14,7 @@ const Button: React.FC<ButtonProps> = ({
     // size = 'medium',
     disabled = false,
     onClick,
+    type = 'button',
 }) => {
     const baseStyles = 'w-3/4 mx-auto cursor-pointer bg-blue-500 rounded p-2.5';
     
@@ -31,6 +32,7 @@ const Button: React.FC<ButtonProps> = ({
 
     return (
         <button
+            type={type}
             className={` ${baseStyles} ${
                 disabled ? 'opacity-50 cursor-not-allowed' : ''
             }`}

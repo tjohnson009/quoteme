@@ -31,7 +31,7 @@ export async function signup(email: string, password: string) {
   localStorage.setItem('user', JSON.stringify(data.user)); // save user data to localStorage
 }
 
-  if (!res.ok) throw new Error(data.error || 'Signup failed');
+  if (!res.ok) throw new Error(data.error || 'Signup failed'); // eventuallly we need graceful error handling here and other places
   return data;
 } 
 

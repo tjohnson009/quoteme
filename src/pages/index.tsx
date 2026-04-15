@@ -24,7 +24,7 @@ export default function SignUpLoginPage() {
 const handleLogin = async(email: string, password: string) => {
     try { 
       await login(email, password); 
-      console.log('Logged in as as ', email);
+      console.log('Logged in as ', email);
       // Redirect or show success message 
       router.push('/dashboard'); // Redirect to dashboard after login is successful
     } catch(error) {
