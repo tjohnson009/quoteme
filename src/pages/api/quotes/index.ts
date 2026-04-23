@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 'Content-type': 'application/json', 
                 'Authorization': req.headers.authorization || ''
             }, 
-            body: req.method === 'POST' ? JSON.stringify(req.body) :  undefined
+            body: req.method === 'POST' ? JSON.stringify(req.body) : undefined
         })
         
         const data = await response.json();
