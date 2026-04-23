@@ -29,7 +29,7 @@ export async function getQuotes(): Promise<Quote[]> {
     const data = await res.json();
 
   if (!res.ok) throw new Error(data.error || 'Something went wrong with getting your quotes.');
-  return data; 
+  return data.userSavedQuotes; 
 }
 
 export async function createQuote(text: string, author: string, tags?: string[], notes?: string): Promise<Quote> {
