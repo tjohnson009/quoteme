@@ -34,5 +34,4 @@ app.use('/v1/api/auth', authRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-    
 }); 
