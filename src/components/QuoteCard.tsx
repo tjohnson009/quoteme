@@ -1,7 +1,6 @@
 export default function QuoteCard({ quote, onDelete }: { 
-    quote: { id: string, text: string, author: string, tags?: string[], notes?: string }, 
-    onDelete: () => void }) 
-    {
+    quote: { id: number, text: string, author: string, tags?: string[], notes?: string }, 
+    onDelete: () => void }) {
   return (
     <div className="border p-4 rounded shadow-sm bg-white">
       <p className="text-lg font-semibold">“{quote.text}”</p>
