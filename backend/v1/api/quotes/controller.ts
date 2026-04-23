@@ -4,23 +4,6 @@ import { Request, Response } from 'express';
 import { getUserAndClient } from '../helpers/getUserAndClient.ts'; 
 // import Quote from '../../models/quote.model'; // Import the Quote interface 
 
-//--------
-// async function testSupabaseConnection(req: Request, res: Response) {
-//   const { data, error } = await supabase
-//     .from('saved-quotes')
-//     .select('id') // just select a lightweight column
-
-//   if (error) {
-//     console.error('Supabase error:', error);
-//     res.status(500).json({ error: 'Supabase connection failed...' });
-//   }
-
-//   res.status(200).json({ message: '✅ Supabase connected successfully!', data });
-// }
-//--------
-// function postmanTester(req: Request, res: Response): void {
-//     }
-
 async function getQuotes(req: Request, res: Response): Promise<void> {
     try {
     const { supabase } = await getUserAndClient(req, res); // Get the user and supabase client
