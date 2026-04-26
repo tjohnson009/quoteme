@@ -34,7 +34,6 @@ export default function Dashboard() {
       const fetchQuotes = async () =>  {
         try {
           setAuthorized(true);
-          setLoading(false);
           const data = await getQuotes();
           setQuotes(data)
         } catch (err) {
