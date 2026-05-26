@@ -43,8 +43,9 @@ export async function createQuote(text: string, author: string, tags?: string[],
          },
          body: JSON.stringify({ text, author, tags, notes })
     })
-
-    return await res.json()
+ 
+    const data = await res.json()
+    return data.insertedData[0]
 }
 
 export async function deleteQuote(id: number): Promise<any> {
