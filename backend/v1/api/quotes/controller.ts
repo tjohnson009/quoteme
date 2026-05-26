@@ -72,7 +72,6 @@ async function createQuote(req: Request, res: Response): Promise<void> {
             
     const { data: insertedData, error: insertError } = await supabase.from('saved_quotes').insert([
                 {
-                    // user_id: userData.user.id, 
                     user_id: userID, 
                     text: req.body.text, 
                     author: req.body.author ? req.body.author : 'Unknown',
@@ -85,14 +84,11 @@ async function createQuote(req: Request, res: Response): Promise<void> {
         console.log('Inserted data:', insertedData); 
         
         if (insertError) {
-            res.status(500).json({ "error": insertError, 
-                // "message": `${insertError.message}`
-            });
+            res.status(500).json({ "error": insertError });
             return; 
         }
         
         res.status(201).json({insertedData}); 
-        // console.log(token);
     } catch(error) {
         console.error('Error creating quote:', error);
         res.status(500).json({ error: 'Failed to create quote.' });
@@ -151,7 +147,5 @@ async function editQuote(req: Request, res: Response): Promise<void> {
 export { getQuotes, 
     createQuote, 
     deleteQuote, 
-    editQuote, 
-    // postmanTester,
-    // testSupabaseConnection 
+    editQuote
 }; 
