@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import {logout} from '@/services/auth'; // proxy logout function
+import { logout } from '@/services/auth'; // proxy logout function
 import { Quote, getQuotes, deleteQuote } from '@/services/quotes';
 import QuoteCard from '@/components/QuoteCard'
 import Button from '@/components/Button';
 import Navbar from '@/components/Navbar'; 
 import Footer from '@/components/Footer';
+import NewQuoteForm from '@/components/NewQuoteForm';
 
 export default function Dashboard() {
   const [quotes, setQuotes] = useState<Quote[]>([]);
@@ -55,10 +56,12 @@ export default function Dashboard() {
   return ( 
     <>
     <main className="min-h-screen">
-
       { loading && <p>Loading your quotes!</p> }
       { error && <p className="error">There was a problem when loading your quotes: {error}</p> }
       { !loading && !error && quotes.length === 0 && <p className="my-2 w-full mx-auto text-sm text-center text-gray-600">You do not have any quotes saved yet {user ? user.email : 'Guest'}. Start saving quotes now to see them here!</p> }
+      <NewQuoteForm onQuoteCreated={(newQuote) => {
+        setQuotes(prev => [...prev, newQuote])
+      }}/>
       { quotes.map(quote => (
         <QuoteCard 
           key={quote.id} 
