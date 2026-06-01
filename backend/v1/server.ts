@@ -15,7 +15,7 @@ import quotesRouter from './api/quotes/routes'; // this is the router for the qu
 // // import SignUpLoginPage from '../../src/pages/index'; // this is a page from the frontend, therefore it is not a good idea to import it here
 // dotenv.config(); // loads environment variables from .env file 
 const app = express();
-const port: number = 5000; 
+const port: number = parseInt(process.env.PORT || '5000');
 
 // middleware
 app.use(express.static(path.join(__dirname, 'public'))); // serves static files from public directory    
