@@ -1,7 +1,7 @@
 // controller = handle the request and response; fetches data from the database and send it back
 // import createSupabaseClient from '../../../supabaseclient'; // Import the supabase client
 import { Request, Response } from 'express';
-import { getUserAndClient } from '../helpers/getUserAndClient.ts'; 
+import { getUserAndClient } from '../helpers/getUserAndClient'; 
 // import Quote from '../../models/quote.model'; // Import the Quote interface 
 
 async function getQuotes(req: Request, res: Response): Promise<void> {
