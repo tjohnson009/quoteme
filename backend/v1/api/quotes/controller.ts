@@ -20,7 +20,7 @@ async function getQuotes(req: Request, res: Response): Promise<void> {
         if (userSavedQuotes && userSavedQuotes.length > 0) {
             res.status(200).json({userSavedQuotes}); 
         } else {
-            res.status(200).json({message: 'No quotes found for this user.'}); // GPT suggests returning an empty array instead
+            res.status(200).json({message: 'No quotes found for this user.'}); 
         }
 
     } catch(error) {
