@@ -30,13 +30,15 @@ export default function NewQuoteForm(props: NewQuoteFormProps) {
         } catch(err) {
             setError("Failed to create quote."); 
             console.error(error, "Something went wrong when trying to create that quote. Try again in a minute...");
+            console.error(err)
         } finally {
             setSubmitting(false); 
         }
     }
 
     return (
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={handleSubmit}>
+            {error && <p className="text-red-500">{error}</p>}
             <input type="text" id="text" value={text} onChange={(e) => setText(e.target.value)} required/>
             <input type="text" id="author" value={author} onChange={(e) => setAuthor(e.target.value)}/>
             <input type="text" id="tags"  value={tags} onChange={(e) => setTags(e.target.value)}/>

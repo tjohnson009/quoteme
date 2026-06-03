@@ -47,7 +47,7 @@ export default function Dashboard() {
 
       fetchQuotes()
     }
-  }, []);
+  }, [router]);
   
   if (loading) return <p>Loading...</p>;
   if (!authorized) return null;
