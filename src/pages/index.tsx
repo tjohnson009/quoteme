@@ -1,12 +1,12 @@
 import React from "react";
 // import { Geist, Geist_Mono } from "next/font/google";
-import {login} from "@/services/auth"; 
-import  {signup}  from "@/services/auth"; 
+import { login } from "@/services/auth"; 
+import  { signup }  from "@/services/auth"; 
 import { useRouter } from "next/router"; 
 // import Button from "@/components/Button";
 import AuthForm from "@/components/AuthForm";
-import Footer from "@/components/Footer"; 
-import Navbar from "@/components/Navbar";
+// import Footer from "@/components/Footer"; 
+// import Navbar from "@/components/Navbar";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",

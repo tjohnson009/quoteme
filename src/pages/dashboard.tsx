@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { logout } from '@/services/auth'; // proxy logout function
+// import { logout } from '@/services/auth'; // proxy logout function
 import { Quote, getQuotes, deleteQuote } from '@/services/quotes';
 import QuoteCard from '@/components/QuoteCard'
-import Button from '@/components/Button';
-import Navbar from '@/components/Navbar'; 
-import Footer from '@/components/Footer';
+// import Button from '@/components/Button';
+// import Navbar from '@/components/Navbar'; 
+// import Footer from '@/components/Footer';
 import NewQuoteForm from '@/components/NewQuoteForm';
 
 export default function Dashboard() {
