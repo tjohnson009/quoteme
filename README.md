@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+[QuoteMe(https://github.com/tjohnson009/quoteme)] - This is a fullstack web app for saving and managing your favorite quotes. Built with Next.js, React, Express, and Supabase.  
 
 ## Getting Started
 
