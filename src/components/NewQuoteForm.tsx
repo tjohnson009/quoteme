@@ -29,7 +29,7 @@ export default function NewQuoteForm(props: NewQuoteFormProps) {
             }
         } catch(err) {
             setError("Failed to create quote."); 
-            console.error(err, "Something went wrong when trying to create that quote. Try again in a minute...");
+            console.error(error, "Something went wrong when trying to create that quote. Try again in a minute...");
         } finally {
             setSubmitting(false); 
         }

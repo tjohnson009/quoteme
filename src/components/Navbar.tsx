@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { logout } from '@/services/auth'
 
-interface NavbarProps {
+// interface NavbarProps {
     
-}
+// }
 
-const Navbar: React.FC<NavbarProps> = () => {
+const Navbar: React.FC = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const handleDropdown = () => setDropdownOpen((open) => !open);
