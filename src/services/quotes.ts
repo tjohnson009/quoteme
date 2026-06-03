@@ -8,6 +8,15 @@
       created_at: string;                                                                                                                                                 
   } 
 
+    interface DeleteQuoteResponse {
+      message: string;                                                                                                                                                      
+      deletedQuoteData: Quote[];
+  }                                                                                                                                                                         
+                                                                                                                                                                          
+  interface EditQuoteResponse {
+      updatedData: Quote[];
+  }
+
 function getToken(): string {
     const token = localStorage.getItem('token'); 
     if (!token) {
@@ -48,7 +57,7 @@ export async function createQuote(text: string, author: string, tags?: string[],
     return data.insertedData[0]
 }
 
-export async function deleteQuote(id: number): Promise<any> {
+export async function deleteQuote(id: number): Promise<DeleteQuoteResponse> {
     const token = getToken()
 
     const res = await fetch(`/api/quotes/${id}`, {
@@ -59,7 +68,7 @@ export async function deleteQuote(id: number): Promise<any> {
     return await res.json()
 }
 
-export async function editQuote(id: number, updates: { text?: string; author?: string; tags?: string[]; notes?: string }): Promise<any> {
+export async function editQuote(id: number, updates: { text?: string; author?: string; tags?: string[]; notes?: string }): Promise<EditQuoteResponse> {
     const token = getToken()
 
     const res = await fetch(`/api/quotes/${id}`, {
