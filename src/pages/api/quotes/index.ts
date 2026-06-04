@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
-        const expressResponse = `${process.env.NEXT_PUBLIC_EXPRESS_API}/v1/api/quotes`; // forwards the browser request to my backend
+        const expressResponse = `${process.env.NEXT_PUBLIC_EXPRESS_API}/v1/api/quotes`; 
         const response = await fetch(expressResponse, {
             method: req.method, 
             headers: {

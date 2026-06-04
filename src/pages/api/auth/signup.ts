@@ -1,5 +1,3 @@
-// src/pages/api/auth/signup.ts
-// this is our Next.js API route that acts as a proxy to the Express backend for user signup 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

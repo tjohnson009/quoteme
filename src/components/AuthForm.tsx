@@ -1,12 +1,9 @@
 import React, { useState, FormEvent } from 'react';
 import Button from './Button';
-// import { supabase } from '@/lib/supabaseClient'; 
-// import { useRouter } from 'next/router'; 
 
 interface AuthFormProps {
     onLogin: (email: string, password: string) => void, 
     onSignup: (email: string, password: string) => void;
-    // onSubmit: (e: FormEvent) => void;
     submitLabel?: string;
     linkText?: string;
     className?: string
@@ -16,7 +13,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
     onLogin,
     onSignup,
     className
-    // linkText = 'Forgot Password?',  
 }) => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
@@ -29,14 +25,12 @@ const handleSubmit = async (e: FormEvent) => {
     setIsLoading(true);
 
     try {
-        // determine which button was clicked
         if (mode === 'login') {
             onLogin(email, password);
         } else {
             onSignup(email, password);
         }
     } catch(error) {
-        // Handle any errors that occur during submission
         setError(error instanceof Error ? error.message : 'An unexpected error occurred');
     } finally {
         setIsLoading(false);
@@ -50,7 +44,6 @@ return (
                 {mode === 'login' ? 'Log Into QuoteMe' : 'Create An Account'}</h2>
             <div className="mb-3">
                 <label className="block">
-                    {/* Email */}
                     <input
                         type="email"
                         name="email"
@@ -66,7 +59,6 @@ return (
             </div>
             <div className="mb-4">
                 <label className="block">
-                    {/* Password */}
                     <input
                         type="password"
                         name="password"
@@ -80,13 +72,13 @@ return (
                     />
                 </label>
             </div>
-            <Button // submit form button
+            <Button
                 type="submit" 
                 disabled={isLoading} 
             >
                 {isLoading ? 'Loading...' : 'Submit'}
             </Button>
-            <Button // toggle mode button
+            <Button 
                 onClick={() => {
                   return mode === 'login' ? setMode('signup') : setMode('login') 
                 }}

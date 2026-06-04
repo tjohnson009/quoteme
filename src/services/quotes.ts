@@ -26,15 +26,12 @@ function getToken(): string {
 }
 
 export async function getQuotes(): Promise<Quote[]> {
-    // read token from storage, if no token throw an error or return empty array
     const token = getToken()
-    // fetch
     const res = await fetch('/api/quotes', {
         method: 'GET',
         headers: { 'Authorization': `Bearer ${token}` }
     });
-    
-    //parse and return
+
     const data = await res.json();
 
   if (!res.ok) throw new Error(data.error || 'Something went wrong with getting your quotes.');

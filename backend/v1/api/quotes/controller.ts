@@ -1,12 +1,9 @@
-// controller = handle the request and response; fetches data from the database and send it back
-// import createSupabaseClient from '../../../supabaseclient'; // Import the supabase client
 import { Request, Response } from 'express';
 import { getUserAndClient } from '../helpers/getUserAndClient'; 
-// import Quote from '../../models/quote.model'; // Import the Quote interface 
 
 async function getQuotes(req: Request, res: Response): Promise<void> {
     try {
-    const { supabase } = await getUserAndClient(req, res); // Get the user and supabase client
+    const { supabase } = await getUserAndClient(req, res); 
 
     const {data: userSavedQuotes, error: quotesError} = await supabase
         .from('saved_quotes')
@@ -43,8 +40,8 @@ async function getQuotes(req: Request, res: Response): Promise<void> {
         const { data: deletedQuoteData, error: deletionError } = await supabase
             .from('saved_quotes')
             .delete()
-            .eq('user_id', userID) // ensures only updating logged in user's quote - should be covered by RLS but this is an extra check - trust but verify! 
-            .eq('id', deletedQuoteID) // Ensure we are updating the correct quote
+            .eq('user_id', userID)  
+            .eq('id', deletedQuoteID) 
             .select(); 
 
         if (deletionError) {
@@ -68,7 +65,7 @@ async function getQuotes(req: Request, res: Response): Promise<void> {
 
 async function createQuote(req: Request, res: Response): Promise<void> {
     try {
-    const { supabase, userID } = await getUserAndClient(req, res); // Get the user and supabase client 
+    const { supabase, userID } = await getUserAndClient(req, res); 
             
     const { data: insertedData, error: insertError } = await supabase.from('saved_quotes').insert([
                 {
@@ -106,8 +103,7 @@ async function editQuote(req: Request, res: Response): Promise<void> {
             res.status(400).json({ error: 'Invalid quote ID.' });
             return; 
         }
-
-        // const { text, author, tags, notes} = req.body; 
+ 
         const updatedFields: { [key: string]: string } = {}; 
         const potentialUpdatedFields = ['text', 'author', 'tags', 'notes'];
         
@@ -120,8 +116,8 @@ async function editQuote(req: Request, res: Response): Promise<void> {
         const { data: updatedData, error: updateError } = await supabase
             .from('saved_quotes')
             .update(updatedFields)
-            .eq('user_id', userID) // ensures only updating logged in user's quote - should be covered by RLS but this is an extra check - trust but verify! 
-            .eq('id', editedQuoteID) // Ensure we are updating the correct quote
+            .eq('user_id', userID)  
+            .eq('id', editedQuoteID) 
             .select(); 
 
         if (updateError) {

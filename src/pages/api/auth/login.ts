@@ -1,4 +1,3 @@
-// this is the Next.js API route that acts as a proxy to the Express backend for user login 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

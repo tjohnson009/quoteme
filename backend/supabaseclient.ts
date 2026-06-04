@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config(); // loads environment variables from .env file
+dotenv.config(); 
 import { createClient, SupabaseClient } from '@supabase/supabase-js'; 
 import { Request } from 'express';
 
@@ -19,7 +19,6 @@ export function createSupabaseClient(req: Request): SupabaseClient {
     const token = req.headers.authorization?.replace('Bearer ', ''); 
 
     if (!token) {
-        // res.status(401).json({ error: 'Unauthorized: token not valid.' });
         throw new Error('Unauthorized: token not provided in authorization header.');
     }
 
@@ -31,14 +30,3 @@ export function createSupabaseClient(req: Request): SupabaseClient {
         }
     });
 }
-
-// const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-//     global: {
-//         headers: {
-//             "Authorization": `Bearer ${token}`, 
-//         }
-//     }
-// }); 
-
-// export default supabase; 
-// export { createSupabaseClient }; 

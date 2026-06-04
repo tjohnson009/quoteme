@@ -1,5 +1,5 @@
 export async function login(email: string, password: string) {
-  const res = await fetch('/api/auth/login', { // fetching from our Next.js API route 
+  const res = await fetch('/api/auth/login', { 
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
@@ -9,8 +9,8 @@ export async function login(email: string, password: string) {
 
 // save access token to localSotrage
 if (data.session?.access_token) {
-  localStorage.setItem('token', data.session.access_token); // save token to localStorage
-  localStorage.setItem('user', JSON.stringify(data.user)); // save user data to localStorage
+  localStorage.setItem('token', data.session.access_token); 
+  localStorage.setItem('user', JSON.stringify(data.user)); 
 }
 
   if (!res.ok) throw new Error(data.error || 'Login failed');
@@ -18,7 +18,7 @@ if (data.session?.access_token) {
 }
 
 export async function signup(email: string, password: string) {
-  const res = await fetch('/api/auth/signup', { // fetching from our Next.js API route 
+  const res = await fetch('/api/auth/signup', { 
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
@@ -27,11 +27,11 @@ export async function signup(email: string, password: string) {
   const data = await res.json();
 
   if (data.session?.access_token) {
-  localStorage.setItem('token', data.session.access_token); // save token to localStorage
-  localStorage.setItem('user', JSON.stringify(data.user)); // save user data to localStorage
+  localStorage.setItem('token', data.session.access_token); 
+  localStorage.setItem('user', JSON.stringify(data.user)); 
 }
 
-  if (!res.ok) throw new Error(data.error || 'Signup failed'); // eventuallly we need graceful error handling here and other places
+  if (!res.ok) throw new Error(data.error || 'Signup failed'); // eventuallly I need graceful error handling here and other places
   return data;
 } 
 

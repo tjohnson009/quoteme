@@ -12,7 +12,6 @@ const Navbar: React.FC = () => {
             Logo
             </div>
 
-            {/* Dropdown */}
             <div className="relative">
             <button
                 onClick={handleDropdown}

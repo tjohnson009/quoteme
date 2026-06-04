@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { SupabaseClient } from '@supabase/supabase-js'; 
-import { createSupabaseClient } from '../../../supabaseclient'; // Adjust the import path as necessary 
+import { createSupabaseClient } from '../../../supabaseclient';
 
 export async function getUserAndClient(req: Request, res: Response): Promise<{ supabase: SupabaseClient; userID: string; }> {
 
-   const supabase = createSupabaseClient(req); // Create a new Supabase client instance 
+   const supabase = createSupabaseClient(req); 
    const token = req.headers.authorization?.replace('Bearer ', ''); 
 
    const { data: userData, error: userError } = await supabase.auth.getUser(token); 
