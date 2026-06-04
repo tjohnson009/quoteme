@@ -1,4 +1,4 @@
-#[QuoteMe](https://github.com/tjohnson009/quoteme)
+# [QuoteMe](https://github.com/tjohnson009/quoteme)
 This is a fullstack web app for saving and managing your favorite quotes. Built with Next.js, React, Express, and Supabase.  
 
 ## Getting Started
