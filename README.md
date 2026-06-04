@@ -45,6 +45,6 @@ The frontend of the app is designed using React. Saving a quote makes a request 
 -- The pages folder 
 -- Next.js API routes
 - Setting up NextJS frontend with a Node and Express backend, and using Typescript
--  The Concurrently Package: allows you to run multiple commands or scripts in a single terminal
+-  The Concurrently Package: allows you to run multiple commands or scripts in a single terminal:
 <br>
 "dev:all": "concurrently \"npm run dev\" \"npm run server\"" --- npm run dev:all
