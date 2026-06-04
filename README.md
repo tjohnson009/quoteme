@@ -36,7 +36,7 @@ The frontend of the app is designed using React. Saving a quote makes a request 
   5. Next.js runs on http://localhost:3000, Express on http://localhost:5000.
 
 ## Bugs I Encountered: 
-- Working with two runtimes: Next for frontend, Node for backend made for interesting issues like modules missing because of faulty tsconfig.json setup
+- Working with two runtimes: Next for frontend, and Node for backend made for interesting issues like modules missing because of faulty tsconfig.json setup
 -  Typescript and Node work with CommonJS modules, but I was using ESNext modules by default because of my Next frontend setup
 
 ## Things I Learned:
@@ -47,4 +47,4 @@ The frontend of the app is designed using React. Saving a quote makes a request 
 - Setting up NextJS frontend with a Node and Express backend, and using Typescript
 -  The Concurrently Package: allows you to run multiple commands or scripts in a single terminal:
 <br>
-"dev:all": "concurrently \"npm run dev\" \"npm run server\"" --- npm run dev:all
+    "dev:all": "concurrently \"npm run dev\" \"npm run server\"" --- npm run dev:all
