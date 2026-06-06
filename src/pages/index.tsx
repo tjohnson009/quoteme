@@ -10,7 +10,6 @@ export default function SignUpLoginPage() {
 const handleLogin = async(email: string, password: string) => {
     try { 
       await login(email, password); 
-      console.log('Logged in as ', email);
       router.push('/dashboard'); 
     } catch(error) {
       console.error("Login failed:", error);
@@ -20,7 +19,6 @@ const handleLogin = async(email: string, password: string) => {
 const handleSignup = async(email: string, password: string) => {
 try {  
   await signup(email, password); 
-  console.log('Signed up as ', email);
   router.push('/dashboard'); // consider changing to a more in depth signup page later
 }
 catch (error) {

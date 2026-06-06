@@ -78,8 +78,6 @@ async function createQuote(req: Request, res: Response): Promise<void> {
             ]
         ).select(); 
         
-        console.log('Inserted data:', insertedData); 
-        
         if (insertError) {
             res.status(500).json({ "error": insertError });
             return; 
