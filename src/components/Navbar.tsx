@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
     const handleDropdown = () => setDropdownOpen((open) => !open);
 
     return (
-        <nav className="w-full h-14 flex sticky items-center justify-between px-2 bg-black-100 border-b border-gray-400">
+        <nav className="w-full h-14 flex sticky items-center justify-between px-2 bg-background-secondary border-b border-gray-400">
             <div className="font-bold text-xl">
             Logo
             </div>
