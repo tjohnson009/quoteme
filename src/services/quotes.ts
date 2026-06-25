@@ -32,6 +32,13 @@ export async function getQuotes(): Promise<Quote[]> {
         headers: { 'Authorization': `Bearer ${token}` }
     });
 
+    if (res.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/';
+        return [];
+    }
+
     const data = await res.json();
 
   if (!res.ok) throw new Error(data.error || 'Something went wrong with getting your quotes.');
