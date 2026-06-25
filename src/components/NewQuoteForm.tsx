@@ -16,9 +16,9 @@ export default function NewQuoteForm(props: NewQuoteFormProps) {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            if (text !== '') {
+            if (text.trim() !== '') {
                 setSubmitting(true); 
-                const quote = await createQuote(text, author, tags.split(',').map(t => t.trim()), notes)
+                const quote = await createQuote(text.trim(), author, tags.split(',').map(t => t.trim()), notes)
                 props.onQuoteCreated(quote)
                 setText('')
                 setAuthor('')
@@ -37,12 +37,19 @@ export default function NewQuoteForm(props: NewQuoteFormProps) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="border border-amber-400 flex flex-col min-h-1/2">
             {error && <p className="text-red-500">{error}</p>}
+            <label htmlFor="text">Quote: </label>
             <input type="text" id="text" value={text} onChange={(e) => setText(e.target.value)} required/>
+
+            <label htmlFor="author">Author: </label>
             <input type="text" id="author" value={author} onChange={(e) => setAuthor(e.target.value)}/>
-            <input type="text" id="tags"  value={tags} onChange={(e) => setTags(e.target.value)}/>
-            <input type="text" id="notes"  value={notes} onChange={(e) => setNotes(e.target.value)}/>
+
+            <label htmlFor="tags">Tags (comma separated)</label>
+            <input type="text" id="tags" value={tags} onChange={(e) => setTags(e.target.value)}/>
+
+            <label htmlFor="notes">Notes</label>
+            <input type="text" id="notes" value={notes} onChange={(e) => setNotes(e.target.value)}/>
             <button type="submit" disabled={submitting}>Save Quote</button>
     </form>
     )
