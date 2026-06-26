@@ -51,14 +51,14 @@ export default function Dashboard() {
 
   return ( 
     <>
-    <main className="mx-auto min-h-screen max-w-3/4 flex flex-col gap-4 flex-1 justify-start border border-accent-2">
+    <main className="mx-auto min-h-screen max-w-287.5 flex flex-col gap-4 flex-1 justify-start">
       { loading && <div className=""><p>Loading your quotes!</p></div>}
       { error && <p className="error">There was a problem when loading your quotes: {error}</p> }
       { !loading && !error && quotes.length === 0 && <p className="my-2 w-full mx-auto text-sm text-center text-gray-600">You do not have any quotes saved yet {user ? user.email : 'Guest'}. Start saving quotes now to see them here!</p> }
       <NewQuoteForm onQuoteCreated={(newQuote) => {
         setQuotes(prev => [newQuote, ...prev])
       }} />
-      <section className="flex flex-col gap-4 pb-4">
+      <section className="grid grid-cols-2 gap-4 pb-4">
       { quotes.map(quote => (
         <QuoteCard 
         key={quote.id} 
