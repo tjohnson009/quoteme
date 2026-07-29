@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Quote, getQuotes, deleteQuote } from '@/services/quotes';
 import QuoteCard from '@/components/QuoteCard'
-import NewQuoteForm from '@/components/NewQuoteForm';
+import QuoteForm from '@/components/QuoteForm';
 import Modal from '@/components/Modal';
 
 export default function Dashboard() {
@@ -10,8 +10,8 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null)
   const [authorized, setAuthorized] = useState(false);
-  // const [selectedQuoteId, setSelectedQuoteId] = useState<number | null>(null)
   const [isAddQuoteModalOpen, setIsAddQuoteModalOpen] = useState<boolean>(false)
+  const [editingQuote, setEditingQuote] = useState<Quote | null>(null)
   const router = useRouter();
 
   const handleDelete = async (id: number) => {
@@ -62,10 +62,21 @@ export default function Dashboard() {
       <main className="mx-auto min-h-screen max-w-287.5 flex flex-col gap-4 flex-1 justify-start">
         {isAddQuoteModalOpen && (
           <Modal onClose={() => setIsAddQuoteModalOpen(false)}>
-            <NewQuoteForm
-              onQuoteCreated={(newQuote) => {
+            <QuoteForm
+              onSave={(newQuote) => {
                 setQuotes((prev) => [newQuote, ...prev]);
                 setIsAddQuoteModalOpen(false);
+              }}
+            />
+          </Modal>
+        )}
+        {editingQuote && (
+          <Modal onClose={() => setEditingQuote(null)}>
+            <QuoteForm
+              initialQuote={editingQuote}
+              onSave={(updated) => {
+                setQuotes((prev) => prev.map((q) => q.id === updated.id ? updated : q));
+                setEditingQuote(null);
               }}
             />
           </Modal>
@@ -80,6 +91,7 @@ export default function Dashboard() {
             <QuoteCard
               key={quote.id}
               quote={quote}
+              onEdit={() => setEditingQuote(quote)}
               onDelete={() => {
                 handleDelete(quote.id);
               }}
