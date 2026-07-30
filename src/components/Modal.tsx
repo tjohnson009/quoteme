@@ -16,7 +16,7 @@ export default function Modal({ onClose, children }: ModalProps) {
 
   return (
     <div onClick={onClose} className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div onClick={(e) => e.stopPropagation()} className="bg-background-secondary rounded-xl shadow-lg p-8 max-w-lg w-full mx-4">
+      <div onClick={(e) => e.stopPropagation()} className="bg-background-secondary rounded-xl shadow-lg p-6 sm:p-8 max-w-lg w-full mx-4">
         {children}
       </div>
     </div>

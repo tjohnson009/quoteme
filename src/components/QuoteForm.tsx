@@ -51,7 +51,7 @@ export default function QuoteForm({ initialQuote, onSave }: QuoteFormProps) {
         }
     }
 
-    const inputClasses = "w-full px-3 py-2 rounded-lg bg-background border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent-1 focus:ring-2 focus:ring-accent-1/20 transition";
+    const inputClasses = "w-full px-3 py-2 rounded-lg bg-background border border-border text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent-1 focus:ring-2 focus:ring-accent-1/20 transition";
     const labelClasses = "block text-sm font-medium text-foreground-secondary mb-1";
 
     return (
