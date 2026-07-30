@@ -37,59 +37,69 @@ const handleSubmit = async (e: FormEvent) => {
     }
 };
 
+const inputClasses = "w-full px-3 py-2 rounded-lg bg-background border border-border text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent-2 focus:ring-2 focus:ring-accent-2/20 transition";
+const labelClasses = "block text-sm font-medium text-foreground-secondary mb-1";
+
 return (
    <form onSubmit={handleSubmit} className={className ? className : ""}>
-            {error && <div className="text-red-500 mb-2">{error}</div>}
-            <h2 className="text-xl font-bold mb-4 mx-auto">
-                {mode === 'login' ? 'Log Into QuoteMe' : 'Create An Account'}</h2>
-            <div className="mb-3">
-                <label className="block">
-                    <input
-                        type="email"
-                        name="email"
-                        value={email}
-                        autoComplete="email"
-                        onChange={e => setEmail(e.target.value)}
-                        required
-                        disabled={isLoading} 
-                        placeholder='Email'
-                        className="w-full p-2 mt-1 border rounded"
-                    />
-                </label>
-            </div>
-            <div className="mb-4">
-                <label className="block">
-                    <input
-                        type="password"
-                        name="password"
-                        value={password}
-                        autoComplete="current-password"
-                        onChange={e => setPassword(e.target.value)}
-                        required
-                        disabled={isLoading}
-                        placeholder='Password'
-                        className="w-full p-2 mt-1 border rounded"
-                    />
-                </label>
-            </div>
-            <Button
-                type="submit"
+        <h2 className="text-xl font-bold text-center text-foreground">
+            {mode === 'login' ? 'Log Into QuoteMe' : 'Create An Account'}
+        </h2>
+
+        {error && (
+            <p className="text-sm text-error bg-error/10 rounded-md px-3 py-2">{error}</p>
+        )}
+
+        <div>
+            <label htmlFor="email" className={labelClasses}>Email</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                autoComplete="email"
+                onChange={e => setEmail(e.target.value)}
+                required
                 disabled={isLoading}
-                className="w-full"
-            >
-                {isLoading ? 'Loading...' : 'Submit'}
-            </Button>
-            <Button
-                onClick={() => {
-                  return mode === 'login' ? setMode('signup') : setMode('login')
-                }}
-                type='button'
-                className="w-full"
-            >{mode === 'login'
-                    ? "Don't have an account? Sign up"
-                    : "Already have an account? Log in"}
-            </Button>
-        </form>
+                placeholder='you@example.com'
+                className={inputClasses}
+            />
+        </div>
+
+        <div>
+            <label htmlFor="password" className={labelClasses}>Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+                onChange={e => setPassword(e.target.value)}
+                required
+                disabled={isLoading}
+                placeholder='••••••••'
+                className={inputClasses}
+            />
+        </div>
+
+        <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full"
+        >
+            {isLoading ? 'Loading...' : (mode === 'login' ? 'Log In' : 'Sign Up')}
+        </Button>
+
+        <button
+            onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
+            type='button'
+            className="text-sm text-accent-2 hover:brightness-110 cursor-pointer transition text-center"
+        >
+            {mode === 'login'
+                ? "Don't have an account? Sign up"
+                : "Already have an account? Log in"}
+        </button>
+    </form>
 )
 }; 
 
