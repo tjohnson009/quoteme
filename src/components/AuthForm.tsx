@@ -2,11 +2,9 @@ import React, { useState, FormEvent } from 'react';
 import Button from './Button';
 
 interface AuthFormProps {
-    onLogin: (email: string, password: string) => void, 
-    onSignup: (email: string, password: string) => void;
-    submitLabel?: string;
-    linkText?: string;
-    className?: string
+    onLogin: (email: string, password: string) => Promise<void>,
+    onSignup: (email: string, password: string) => Promise<void>;
+    className?: string;
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({
@@ -23,12 +21,13 @@ const [mode, setMode] = useState<'login' | 'signup'>('login');
 const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
 
     try {
         if (mode === 'login') {
-            onLogin(email, password);
+            await onLogin(email, password);
         } else {
-            onSignup(email, password);
+            await onSignup(email, password);
         }
     } catch(error) {
         setError(error instanceof Error ? error.message : 'An unexpected error occurred');
