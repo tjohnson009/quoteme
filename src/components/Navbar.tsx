@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
     const handleDropdown = () => setDropdownOpen((open) => !open);
 
     return (
-        <nav className="w-full h-14 flex sticky items-center justify-between px-2 bg-background-secondary border-b border-gray-400">
+        <nav className="w-full h-14 flex sticky top-0 z-40 items-center justify-between px-2 bg-background-secondary border-b border-border">
             <div className="font-bold text-xl">
             Logo
             </div>
@@ -22,17 +22,17 @@ const Navbar: React.FC = () => {
             </button>
             {dropdownOpen && (
                 <div
-                className="absolute right-0 top-10 bg-white shadow-lg rounded min-w-[120px] z-10"
+                className="absolute right-0 top-10 bg-background-secondary border border-border shadow-lg rounded min-w-[120px] z-10"
                 >
                 <button
-                    className="block w-full px-4 py-3 bg-transparent border-none text-left cursor-pointer hover:bg-gray-100"
+                    className="block w-full px-4 py-3 bg-transparent border-none text-left cursor-pointer hover:bg-foreground/10"
                     onClick={() => setDropdownOpen(false)}
                     type="button"
                 >
                     Profile
                 </button>
                 <button
-                    className="block w-full px-4 py-3 bg-transparent border-none text-left cursor-pointer text-red-600 hover:bg-gray-100"
+                    className="block w-full px-4 py-3 bg-transparent border-none text-left cursor-pointer text-error hover:bg-foreground/10"
                     onClick={() => {
                     setDropdownOpen(false);
                     logout()

@@ -59,7 +59,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <main className="mx-auto min-h-screen max-w-287.5 flex flex-col gap-4 flex-1 justify-start">
+      <main className="mx-auto w-full max-w-287.5 px-4 sm:px-6 flex flex-col gap-4 flex-1 justify-start">
         {isAddQuoteModalOpen && (
           <Modal onClose={() => setIsAddQuoteModalOpen(false)}>
             <QuoteForm
@@ -81,12 +81,11 @@ export default function Dashboard() {
             />
           </Modal>
         )}
-        {loading && <div className=""><p>Loading your quotes!</p></div>}
-        {error && <p className="error">There was a problem when loading your quotes: {error}</p>}
+        {error && <p className="text-sm text-error bg-error/10 rounded-md px-3 py-2">There was a problem when loading your quotes: {error}</p>}
         {!loading && !error && quotes.length === 0 && <p className="my-2 w-full mx-auto text-sm text-center text-gray-600">You do not have any quotes saved yet {user ? user.email : 'Guest'}. Start saving quotes now to see them here!</p>}
         {quotes.length > 0 && <div className="text-2xl mx-auto py-4 font-semibold"><p>Your Saved Quotes</p></div>}
-        <button onClick={handleAddQuoteClick}  className="add-quote text-xl font-semibold mx-auto cursor-pointer text-accent-1">Add Quotes</button>
-        <section className="grid grid-cols-2 gap-4 py-4">
+        <button onClick={handleAddQuoteClick} className="mx-auto px-6 py-3 rounded-lg bg-accent-1 text-on-accent font-semibold hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-accent-1/40 cursor-pointer transition">Add Quote</button>
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
           {quotes.map(quote => (
             <QuoteCard
               key={quote.id}

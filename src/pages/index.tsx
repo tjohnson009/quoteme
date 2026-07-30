@@ -27,15 +27,13 @@ catch (error) {
 }
 
   return (
-    <>
-      <main className="py-2 gap-[1/4] w-full items-center m-0 mx-auto sm:items-start border-blue-500 border-1">
-         <p className="mt-2">QuoteMe</p>
-    <AuthForm
-      onLogin={handleLogin}
-      onSignup={handleSignup}
-      className="max-w-[320px] w-3/4 mx-auto flex flex-col gap-[2vh] my-2"
-       ></AuthForm>
-      </main>
-      </>
+    <main className="flex-1 flex flex-col items-center justify-center gap-6 px-4 py-8">
+      <h1 className="text-3xl font-bold">QuoteMe</h1>
+      <AuthForm
+        onLogin={handleLogin}
+        onSignup={handleSignup}
+        className="w-full max-w-sm flex flex-col gap-4"
+      />
+    </main>
   );
 }

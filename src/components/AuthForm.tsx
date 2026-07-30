@@ -73,16 +73,18 @@ return (
                 </label>
             </div>
             <Button
-                type="submit" 
-                disabled={isLoading} 
+                type="submit"
+                disabled={isLoading}
+                className="w-full"
             >
                 {isLoading ? 'Loading...' : 'Submit'}
             </Button>
-            <Button 
+            <Button
                 onClick={() => {
-                  return mode === 'login' ? setMode('signup') : setMode('login') 
+                  return mode === 'login' ? setMode('signup') : setMode('login')
                 }}
                 type='button'
+                className="w-full"
             >{mode === 'login'
                     ? "Don't have an account? Sign up"
                     : "Already have an account? Log in"}
