@@ -1,50 +1,96 @@
-# [QuoteMe](https://github.com/tjohnson009/quoteme)
-This is a fullstack web app for saving and managing your favorite quotes. Built with Next.js, React, Express, and Supabase.  
+# QuoteMe
 
-### Live Demo: https://github.com/tjohnson009/quoteme 
+> A personal quote library — save the words that matter, tag them, add your own notes, and revisit them anytime. Built with Next.js, React, Express, and Supabase.
+
+**Live demo:** [quoteme-live.vercel.app](https://quoteme-live.vercel.app/) · **Source:** [github.com/tjohnson009/quoteme](https://github.com/tjohnson009/quoteme)
+
+<!-- Screenshots go here once available. Suggested: docs/screenshot-dashboard.png, docs/screenshot-add-quote.png -->
+
+## What It Is
+
+QuoteMe is a full-stack web app for building a personal collection of quotes. Sign up, save quotes with attribution, tag them by theme, add your own notes about why they resonate, and come back to them whenever you need. Built end-to-end — auth, database, API, UI, and deployment.
+
+## Features
+
+- **Auth** — email/password signup and login backed by Supabase
+- **Full CRUD** for quotes: create, read, update, delete
+- **Tags and notes** — categorize each quote and attach personal reflections
+- **Progressive disclosure** — notes and tags hide behind toggles so cards start clean and expand on demand
+- **Responsive layout** — single-column on mobile, two-column on wider screens
+- **Dark mode** — follows OS preference via CSS variables
+- **Accessible modals** — Escape-to-close, focus management, backdrop dismiss
+- **Deployed** — Vercel (frontend) + Render (backend) + Supabase (managed Postgres)
 
 ## Tech Stack
-- TypeScript
-- React
-- Next.js
-- TailwindCSS
-- Express
-- Supabase (PostgreSQL + Auth)
-- Deployed with Vercel and Render
 
-## How The App Is Designed / Architecture: 
-The frontend of the app is designed using React. Saving a quote makes a request to my Next.js API routes, then from the Next.js API routes the request is forwarded to my Express server. This allows me to bypass CORS issues when sending a request to another URL. CORS issues are browser related. The Next.js API route and Express server can communicate with no issues because they are both servers. This is called the proxy pattern because the Next.js API acts as a proxy. All requests follow this pattern: Browser action -> Next.js API route -> Express -> Supabase. 
+| Layer | Choice |
+|---|---|
+| Language | TypeScript |
+| Frontend | Next.js (Pages Router), React 19, Tailwind CSS v4 |
+| Backend | Express (Node) |
+| Database + Auth | Supabase (Postgres) |
+| Hosting | Vercel (frontend) + Render (backend) |
 
- ## Running QuoteMe Locally
-  1. Clone the repo
-     ```bash
-     git clone https://github.com/tjohnson009/quoteme.git
-     cd quoteme
+## Architecture
 
-  2. Install dependencies
-  npm install
-  3. Create a .env.local file in the project root
-  NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
-  NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-  NEXT_PUBLIC_EXPRESS_API=http://localhost:5000
-  4. Create a .env file in the project root
-  SUPABASE_URL=your-supabase-url
-  SUPABASE_ANON_KEY=your-anon-key
-  SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
-  5. Start both servers
-  npm run dev:all
-  5. Next.js runs on http://localhost:3000, Express on http://localhost:5000.
+Every browser request follows a proxy pattern that keeps secrets server-side and sidesteps CORS entirely:
 
-## Bugs I Encountered: 
-- Working with two runtimes: Next for frontend, and Node for backend made for interesting issues like modules missing because of faulty tsconfig.json setup
--  Typescript and Node work with CommonJS modules, but I was using ESNext modules by default because of my Next frontend setup
+```
+Browser  ─►  Next.js API route  ─►  Express server  ─►  Supabase
+             (proxy layer)          (business logic)     (data + auth)
+```
 
-## Things I Learned:
-- Full stack data flow and how everything links together
--  NextJS setup and tools:
--- The pages folder 
--- Next.js API routes
-- Setting up NextJS frontend with a Node and Express backend, and using Typescript
--  The Concurrently Package: allows you to run multiple commands or scripts in a single terminal:
-<br>
-    "dev:all": "concurrently \"npm run dev\" \"npm run server\"" --- npm run dev:all
+**Why the extra hop through Next.js API routes?** CORS is a browser-enforced restriction — server-to-server calls skip it. Routing browser requests through Next.js API handlers means the browser only ever talks to its own origin, and the Next → Express call happens server-side where CORS doesn't apply. It also keeps the Supabase service-role key out of the client bundle.
+
+Auth is handled by Supabase; JWTs are forwarded from the browser through the proxy to the Express server, which verifies them before touching the database.
+
+## Running Locally
+
+**Requirements:** Node 18+, a Supabase project.
+
+```bash
+git clone https://github.com/tjohnson009/quoteme.git
+cd quoteme
+npm install
+```
+
+Create `.env.local` in the project root (used by Next.js):
+
+```
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+NEXT_PUBLIC_EXPRESS_API=http://localhost:5000
+```
+
+Create `.env` in the project root (used by the Express server):
+
+```
+SUPABASE_URL=your-supabase-url
+SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+```
+
+Start both servers:
+
+```bash
+npm run dev:all
+```
+
+Frontend runs on `http://localhost:3000`, backend on `http://localhost:5000`.
+
+## Design Choices
+
+- **Two-runtime setup (Next + Express) instead of Next-only.** Adds complexity, but forced clean separation between UI and API concerns and taught me production-shape data flow (browser → proxy → server → DB) rather than everything-in-one-framework shortcuts.
+- **CSS variables + Tailwind v4 `@theme inline`** for the design system. Every color is a semantic token (`bg-background`, `text-muted-foreground`, `border-border`) mapped once to raw values — flipping to dark mode is a single `@media` block, not per-component overrides.
+- **"Approach B" modal rendering.** The dashboard mounts modals conditionally rather than passing `isOpen` — internal form state resets naturally between opens, no cleanup needed, and animation state can be added later without refactoring the mount logic.
+- **Escape-to-close via `useEffect` cleanup pattern.** Global keydown listeners added on mount, removed on unmount — cleanest React pattern for global browser APIs.
+
+## Roadmap
+
+Next up:
+- Search and tag-based filtering
+- Optimistic UI on save/delete
+- Dark mode toggle (currently OS-only)
+- Focus trap + full ARIA in modals
+- Move off `localStorage` for auth tokens (XSS-safer session handling)
+- Progressive Web App (installable, offline-capable)
