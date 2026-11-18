@@ -1,6 +1,7 @@
 import express from 'express';
 import { supabase, supabaseAdmin } from '../../../supabaseclient';
 import { sampleQuotes } from '../demo/sampleQuotes';
+import { deleteOldDemoAccounts } from '../demo/deleteOldDemoAccounts';
 
 const router = express.Router();
 router.post('/login', async (req, res) => {
@@ -66,7 +67,9 @@ router.post('/demo', async (req, res) => {
   }
 
   res.status(200).json({ session: data.session, user: data.user });
-  return;
+
+  // clean up demo accounts older than 24 hours (after answering, so the visitor doesn't wait)
+  await deleteOldDemoAccounts();
 });
 
 export default router;
