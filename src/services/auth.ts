@@ -33,7 +33,7 @@ export async function signup(email: string, password: string) {
 
   if (!res.ok) throw new Error(data.error || 'Signup failed'); // eventuallly I need graceful error handling here and other places
   return data;
-}
+} 
 
 // logs into a temporary demo account that comes with sample quotes
 export async function startDemo() {

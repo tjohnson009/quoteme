@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { login } from "@/services/auth";
-import  { signup }  from "@/services/auth";
+import { login } from "@/services/auth"; 
+import  { signup }  from "@/services/auth"; 
 import { startDemo } from "@/services/auth";
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"; 
 import AuthForm from "@/components/AuthForm";
 import Button from "@/components/Button";
 
 export default function SignUpLoginPage() {
-  const router = useRouter();
+  const router = useRouter(); 
   const [isDemoLoading, setIsDemoLoading] = useState(false);
   const [demoError, setDemoError] = useState<string | null>(null);
 
@@ -25,6 +25,7 @@ const handleDemo = async() => {
     setIsDemoLoading(true);
     setDemoError(null);
 
+    // no finally here (unlike AuthForm): on success the button should stay disabled while we go to the dashboard
     try {
         await startDemo();
         router.push('/dashboard');

@@ -32,7 +32,7 @@ router.post('/signup', async (req, res) => {
     return; 
   }
   res.status(200).json({ user: data.user, session: data.session });
-  return;
+  return; 
 });
 
 router.post('/demo', async (req, res) => {

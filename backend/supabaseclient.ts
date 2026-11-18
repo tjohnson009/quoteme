@@ -8,7 +8,7 @@ const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 // for signup/login
-export const supabase = createClient(supabaseUrl!, supabaseServiceRoleKey!);
+export const supabase = createClient(supabaseUrl!, supabaseServiceRoleKey!); 
 
 // ADMIN client (for the demo: adding sample quotes and cleaning up old demo accounts)
 // never log in with this one, so it always acts as the server and not as a user
