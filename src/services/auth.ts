@@ -33,7 +33,25 @@ export async function signup(email: string, password: string) {
 
   if (!res.ok) throw new Error(data.error || 'Signup failed'); // eventuallly I need graceful error handling here and other places
   return data;
-} 
+}
+
+// logs into a temporary demo account that comes with sample quotes
+export async function startDemo() {
+  const res = await fetch('/api/auth/demo', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  const data = await res.json();
+
+  if (data.session?.access_token) {
+  localStorage.setItem('token', data.session.access_token);
+  localStorage.setItem('user', JSON.stringify(data.user));
+}
+
+  if (!res.ok) throw new Error(data.error || 'Could not start the demo');
+  return data;
+}
 
 export function logout() {
   localStorage.removeItem('token'); 
