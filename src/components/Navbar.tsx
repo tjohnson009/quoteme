@@ -1,58 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { logout } from '@/services/auth'
 
 const Navbar: React.FC = () => {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-
-    const handleDropdown = () => setDropdownOpen((open) => !open);
+    const router = useRouter();
+    // only show Log out once someone is on their dashboard
+    const isDashboard = router.pathname === '/dashboard';
 
     return (
-        <nav className="w-full h-14 flex sticky top-0 z-40 items-center justify-between px-2 bg-background-secondary border-b border-border">
-            <Link href="/dashboard" className="font-bold text-xl text-foreground hover:text-accent-1 transition">
-              QuoteMe
+        <nav className="w-full h-16 sticky top-0 z-40 bg-background-secondary/80 backdrop-blur-md border-b border-border">
+            {/* same max width as the pages, so the logo lines up with the content */}
+            <div className="h-full max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+            <Link href="/dashboard" className="flex items-center gap-2 font-serif text-2xl font-semibold text-foreground hover:text-accent-2 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-accent-2" aria-hidden="true">
+                    <path d="M4 18v-5.2c0-3.6 1.6-6.1 4.9-7.6l1 1.7C8 7.9 7 9.2 6.9 11H9v7H4zm10 0v-5.2c0-3.6 1.6-6.1 4.9-7.6l1 1.7C18 7.9 17 9.2 16.9 11H19v7h-5z" />
+                </svg>
+                QuoteMe
             </Link>
 
-            <div className="relative">
-            <button
-                onClick={handleDropdown}
-                className="bg-transparent border-none cursor-pointer p-2 rounded-md hover:bg-foreground/10 focus:outline-none focus:ring-2 focus:ring-accent-2/40 transition"
-                type="button"
-                aria-label={dropdownOpen ? "Close menu" : "Open menu"}
-                aria-expanded={dropdownOpen}
-            >
-                {dropdownOpen ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                )}
-            </button>
-            {dropdownOpen && (
-                <div
-                className="absolute right-0 top-10 bg-background-secondary border border-border shadow-lg rounded min-w-[120px] z-10"
-                >
+            {isDashboard && (
                 <button
-                    className="block w-full px-4 py-3 bg-transparent border-none text-left cursor-pointer hover:bg-foreground/10"
-                    onClick={() => setDropdownOpen(false)}
+                    onClick={() => logout()}
                     type="button"
+                    className="px-3 py-1.5 rounded-lg text-sm font-medium text-foreground-secondary cursor-pointer hover:bg-foreground/5 hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-2/40 transition"
                 >
-                    Profile
+                    Log out
                 </button>
-                <button
-                    className="block w-full px-4 py-3 bg-transparent border-none text-left cursor-pointer text-error hover:bg-foreground/10"
-                    onClick={() => {
-                    setDropdownOpen(false);
-                    logout()
-                    }}
-                    type="button"
-                >
-                    Logout
-                </button>
-                </div>
             )}
             </div>
         </nav>
