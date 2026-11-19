@@ -10,6 +10,15 @@ const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 // for signup/login
 export const supabase = createClient(supabaseUrl!, supabaseServiceRoleKey!); 
 
+// ADMIN client (for the demo: adding sample quotes and cleaning up old demo accounts)
+// never log in with this one, so it always acts as the server and not as a user
+export const supabaseAdmin = createClient(supabaseUrl!, supabaseServiceRoleKey!, {
+    auth: {
+        persistSession: false,
+        autoRefreshToken: false
+    }
+});
+
 // TOKEN based client (for authenticated requests only)
 export function createSupabaseClient(req: Request): SupabaseClient {
     if (!supabaseUrl || !supabaseAnonKey) {

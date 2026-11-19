@@ -35,8 +35,27 @@ export async function signup(email: string, password: string) {
   return data;
 } 
 
-export function logout() {
+// logs into a temporary demo account that comes with sample quotes
+export async function startDemo() {
+  const res = await fetch('/api/auth/demo', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  const data = await res.json();
+
+  if (data.session?.access_token) {
+  localStorage.setItem('token', data.session.access_token);
+  localStorage.setItem('user', JSON.stringify(data.user));
+}
+
+  if (!res.ok) throw new Error(data.error || 'Could not start the demo');
+  return data;
+}
+
+// redirectTo lets the demo banner send people straight to the signup form
+export function logout(redirectTo: string = "/") {
   localStorage.removeItem('token'); 
   localStorage.removeItem('user'); 
-  window.location.href = "/"
+  window.location.href = redirectTo
 }
