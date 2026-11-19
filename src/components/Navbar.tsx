@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
                 <button
                     onClick={() => logout()}
                     type="button"
-                    className="px-3 py-1.5 rounded-lg text-sm font-medium text-foreground-secondary cursor-pointer hover:bg-foreground/5 hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-2/40 transition"
+                    className="px-3 py-1.5 rounded-lg text-sm font-medium text-foreground-secondary cursor-pointer hover:bg-foreground/5 hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-2 transition"
                 >
                     Log out
                 </button>

@@ -16,7 +16,7 @@ QuoteMe is a full-stack web app for building a personal collection of quotes. Si
 - **Try the demo**: one click gives each visitor a private, temporary account with sample quotes (Supabase anonymous sign-in), deleted after 24 hours
 - **Full CRUD** for quotes: create, read, update, delete
 - **Tags and notes** — categorize each quote and attach personal reflections
-- **Progressive disclosure**: tags show on every card, and longer notes hide behind a "Show notes" toggle
+- **Progressive disclosure**: tags show on every card, and notes hide behind a "Show notes" toggle so cards stay short
 - **Delete confirmation**: deleting a quote asks first, so nothing is lost by accident
 - **Responsive layout**: one column on phones, two on tablets, three on wide screens
 - **Dark mode** — follows OS preference via CSS variables

@@ -15,7 +15,7 @@ export default function QuoteCard({ quote, onEdit, onDelete }: QuoteCardProps) {
   return (
     <div className="border border-border p-6 rounded-2xl shadow-sm hover:shadow-md bg-background-secondary break-words transition-shadow">
       <blockquote className="border-l-2 border-accent-2 pl-4 font-serif text-xl leading-relaxed text-foreground">“{quote.text}”</blockquote>
-      {quote.author !== "Unknown" && (
+      {quote.author && quote.author !== "Unknown" && (
         <p className="mt-3 pl-4 text-xs uppercase tracking-widest text-muted-foreground">{quote.author}</p>
       )}
 
@@ -25,7 +25,7 @@ export default function QuoteCard({ quote, onEdit, onDelete }: QuoteCardProps) {
           {quote.tags.map((tag) => (
             <span
               key={tag}
-              className="text-xs px-2.5 py-1 rounded-full bg-background border border-border text-foreground-secondary"
+              className="max-w-full text-xs px-2.5 py-1 rounded-full bg-background border border-border text-foreground-secondary"
             >
               {tag}
             </span>

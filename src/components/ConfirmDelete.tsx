@@ -15,17 +15,19 @@ export default function ConfirmDelete({ quote, onCancel, onConfirm }: ConfirmDel
             <p className="text-sm text-muted-foreground">This can&apos;t be undone.</p>
 
             <div className="mt-2 flex justify-end gap-3">
+                {/* focus starts on Cancel, the safe choice, so keyboard users land inside the dialog */}
                 <button
                     onClick={onCancel}
                     type="button"
-                    className="px-4 py-2.5 rounded-lg border border-border text-foreground font-medium cursor-pointer hover:bg-foreground/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-2/50 transition"
+                    autoFocus
+                    className="px-4 py-2.5 rounded-lg border border-border text-foreground font-medium cursor-pointer hover:bg-foreground/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-2 transition"
                 >
                     Cancel
                 </button>
                 <button
                     onClick={onConfirm}
                     type="button"
-                    className="px-4 py-2.5 rounded-lg bg-error text-on-accent font-medium shadow-sm cursor-pointer hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-error/50 transition"
+                    className="px-4 py-2.5 rounded-lg bg-error text-on-accent font-medium shadow-sm cursor-pointer hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-error transition"
                 >
                     Delete
                 </button>

@@ -48,7 +48,7 @@ const handleDemo = async() => {
           <Button
             onClick={handleDemo}
             disabled={isDemoLoading}
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto lg:px-6 lg:py-3 lg:text-lg"
           >
             {isDemoLoading ? 'Loading...' : 'Try the demo'}
           </Button>
@@ -59,7 +59,7 @@ const handleDemo = async() => {
           <p className="max-w-md text-sm text-error bg-error/10 rounded-md px-3 py-2">{demoError}</p>
         )}
 
-        {/* a sample card so visitors can see what a saved quote looks like (hidden on phones to keep the page short) */}
+        {/* a sample card so visitors can see what a saved quote looks like (hidden below 1024px wide to keep smaller screens short) */}
         <figure className="hidden lg:block mt-6 max-w-md bg-background-secondary border border-border rounded-2xl shadow-sm p-6">
           <blockquote className="border-l-2 border-accent-2 pl-4 font-serif text-xl leading-relaxed text-foreground">
             “Well done is better than well said.”
