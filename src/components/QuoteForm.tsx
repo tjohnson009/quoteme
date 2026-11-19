@@ -51,12 +51,12 @@ export default function QuoteForm({ initialQuote, onSave }: QuoteFormProps) {
         }
     }
 
-    const inputClasses = "w-full px-3 py-2 rounded-lg bg-background border border-border text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent-1 focus:ring-2 focus:ring-accent-1/20 transition";
+    const inputClasses = "w-full px-3 py-2.5 rounded-lg bg-background border border-border text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent-2 focus:ring-2 focus:ring-accent-2/20 transition";
     const labelClasses = "block text-sm font-medium text-foreground-secondary mb-1";
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <h2 className="text-xl font-semibold text-foreground">
+            <h2 className="font-serif text-2xl font-medium text-foreground pr-8">
                 {isEditing ? "Edit quote" : "Add a new quote"}
             </h2>
 
@@ -117,7 +117,7 @@ export default function QuoteForm({ initialQuote, onSave }: QuoteFormProps) {
             <button
                 type="submit"
                 disabled={submitting}
-                className="mt-2 px-4 py-2 rounded-lg bg-accent-1 text-on-accent font-medium hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-accent-1/40 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                className="mt-2 px-4 py-2.5 rounded-lg bg-accent-1 text-on-accent font-medium shadow-sm cursor-pointer hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-2/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background-secondary disabled:opacity-50 disabled:cursor-not-allowed transition"
             >
                 {submitting ? "Saving..." : isEditing ? "Save changes" : "Save Quote"}
             </button>
