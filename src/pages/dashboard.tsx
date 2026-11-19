@@ -86,7 +86,7 @@ export default function Dashboard() {
         {user && user.is_anonymous && (
           <div className="mt-4 bg-background-secondary border border-border rounded-lg px-4 py-3 text-sm">
             <p>You&apos;re trying QuoteMe with sample quotes. This copy is just yours and is cleared after 24 hours.</p>
-            <button onClick={() => logout()} type="button" className="mt-1 text-accent-2 hover:brightness-110 cursor-pointer transition">Create an account</button>
+            <button onClick={() => logout('/?mode=signup')} type="button" className="mt-1 text-accent-2 hover:brightness-110 cursor-pointer transition">Create an account</button>
           </div>
         )}
         {error && <p className="text-sm text-error bg-error/10 rounded-md px-3 py-2">There was a problem when loading your quotes: {error}</p>}

@@ -53,8 +53,9 @@ export async function startDemo() {
   return data;
 }
 
-export function logout() {
+// redirectTo lets the demo banner send people straight to the signup form
+export function logout(redirectTo: string = "/") {
   localStorage.removeItem('token'); 
   localStorage.removeItem('user'); 
-  window.location.href = "/"
+  window.location.href = redirectTo
 }

@@ -42,6 +42,7 @@ const handleDemo = async() => {
         onLogin={handleLogin}
         onSignup={handleSignup}
         className="w-full max-w-sm flex flex-col gap-4"
+        initialMode={router.query.mode === 'signup' ? 'signup' : 'login'}
       />
 
       {/* "or" divider between the login form and the demo button */}

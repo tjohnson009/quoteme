@@ -1,22 +1,31 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import Button from './Button';
 
 interface AuthFormProps {
     onLogin: (email: string, password: string) => Promise<void>,
     onSignup: (email: string, password: string) => Promise<void>;
     className?: string;
+    initialMode?: 'login' | 'signup';
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({
     onLogin,
     onSignup,
-    className
+    className,
+    initialMode
 }) => {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [isLoading, setIsLoading] = useState(false); 
 const [error, setError] = useState<string | null>(null);
 const [mode, setMode] = useState<'login' | 'signup'>('login'); 
+
+// the page's URL is only ready after the first render, so switch modes here (e.g. /?mode=signup)
+useEffect(() => {
+    if (initialMode) {
+        setMode(initialMode);
+    }
+}, [initialMode]);
 
 const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
