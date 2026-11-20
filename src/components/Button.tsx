@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
     type = 'button',
     className = '',
 }) => {
-    const baseStyles = 'px-4 py-2 rounded-lg bg-accent-2 text-on-accent font-medium cursor-pointer hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-accent-2/40 disabled:opacity-50 disabled:cursor-not-allowed transition';
+    const baseStyles = 'px-4 py-2.5 rounded-lg bg-accent-1 text-on-accent font-medium shadow-sm cursor-pointer hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-2 disabled:opacity-50 disabled:cursor-not-allowed transition';
 
     return (
         <button

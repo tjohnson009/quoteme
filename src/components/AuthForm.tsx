@@ -45,12 +45,12 @@ const handleSubmit = async (e: FormEvent) => {
     }
 };
 
-const inputClasses = "w-full px-3 py-2 rounded-lg bg-background border border-border text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent-2 focus:ring-2 focus:ring-accent-2/20 transition";
+const inputClasses = "w-full px-3 py-2.5 rounded-lg bg-background border border-border text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent-2 focus:ring-2 focus:ring-accent-2/20 transition";
 const labelClasses = "block text-sm font-medium text-foreground-secondary mb-1";
 
 return (
    <form onSubmit={handleSubmit} className={className ? className : ""}>
-        <h2 className="text-xl font-bold text-center text-foreground">
+        <h2 className="font-serif text-3xl font-medium text-foreground">
             {mode === 'login' ? 'Log Into QuoteMe' : 'Create An Account'}
         </h2>
 
@@ -101,7 +101,7 @@ return (
         <button
             onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
             type='button'
-            className="text-sm text-accent-2 hover:brightness-110 cursor-pointer transition text-center"
+            className="text-sm text-accent-2 font-medium hover:underline underline-offset-4 cursor-pointer transition text-center"
         >
             {mode === 'login'
                 ? "Don't have an account? Sign up"

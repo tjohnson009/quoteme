@@ -12,39 +12,41 @@
   --color-border: var(--border);
   --color-muted-foreground: var(--muted-fg);
   --color-on-accent: var(--on-accent);
+  --font-sans: var(--font-inter); /* set by next/font in _app.tsx */
+  --font-serif: var(--font-newsreader);
 }
 
-:root { /* light mode default */
+:root { /* light mode default: neutral grays, ink buttons, green highlights */
   box-sizing: border-box;
-  --bg-primary: #e3e7e8;
-  --bg-secondary: #d0d6d8;
-  --fg-primary: #090b0c;
-  --fg-secondary: #22292b;
-  --accent-primary: #10b981;
-  --accent-secondary: #3b82f6;
-  --error: #ef4444;
-  --border: #b8c0c3;
-  --muted-fg: #6b7280;
+  --bg-primary: #fafafa;
+  --bg-secondary: #ffffff;
+  --fg-primary: #18181b;
+  --fg-secondary: #3f3f46;
+  --accent-primary: #18181b;
+  --accent-secondary: #047857;
+  --error: #b91c1c;
+  --border: #e4e4e7;
+  --muted-fg: #71717a;
   --on-accent: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-primary: #090b0c;
-    --bg-secondary: #161b1d;
-    --fg-primary: #e3e7e8;
-    --fg-secondary: #d0d6d8;
-    --accent-primary: #047857;
-    --accent-secondary: #1d4ed8;
-    --border: #2c3336;
-    --muted-fg: #9ca3af;
-    --on-accent: #ffffff;
+    --bg-primary: #09090b;
+    --bg-secondary: #18181b;
+    --fg-primary: #fafafa;
+    --fg-secondary: #d4d4d8;
+    --accent-primary: #fafafa;
+    --accent-secondary: #34d399;
+    --error: #f87171;
+    --border: #27272a;
+    --muted-fg: #a1a1aa;
+    --on-accent: #18181b;
   }
 }
 
 body {
   background: var(--bg-primary);
   color: var(--fg-primary);
-  font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
 }

@@ -1,13 +1,12 @@
 import React from "react";
 
 const Footer: React.FC = () => (
-  <footer className="w-full bg-background-secondary text-foreground-secondary border-t border-border py-4 mt-auto">
-    <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between px-4">
-      <span className="text-sm">&copy; {new Date().getFullYear()} QuoteMe - All rights reserved.</span>
-      <div className="flex gap-4 mt-2 sm:mt-0">
-        <a href="#" className="hover:underline text-muted-foreground text-sm">Privacy Policy</a>
-        <a href="#" className="hover:underline text-muted-foreground text-sm">Terms of Service</a>
-        <a href="mailto:timjohnson0914@gmail.com" className="hover:underline text-muted-foreground text-sm">Contact</a>
+  <footer className="w-full border-t border-border py-6 mt-auto">
+    <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 px-4 sm:px-6">
+      <span className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} QuoteMe</span>
+      <div className="flex gap-5">
+        <a href="https://github.com/tjohnson009/quoteme" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition">View the code on GitHub</a>
+        <a href="mailto:timjohnson0914@gmail.com" className="text-sm text-muted-foreground hover:text-foreground transition">Contact</a>
       </div>
     </div>
   </footer>

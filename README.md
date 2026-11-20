@@ -13,10 +13,12 @@ QuoteMe is a full-stack web app for building a personal collection of quotes. Si
 ## Features
 
 - **Auth** — email/password signup and login backed by Supabase
+- **Try the demo**: one click gives each visitor a private, temporary account with sample quotes (Supabase anonymous sign-in), deleted after 24 hours
 - **Full CRUD** for quotes: create, read, update, delete
 - **Tags and notes** — categorize each quote and attach personal reflections
-- **Progressive disclosure** — notes and tags hide behind toggles so cards start clean and expand on demand
-- **Responsive layout** — single-column on mobile, two-column on wider screens
+- **Progressive disclosure**: tags show on every card, and notes hide behind a "Show notes" toggle so cards stay short
+- **Delete confirmation**: deleting a quote asks first, so nothing is lost by accident
+- **Responsive layout**: one column on phones, two on tablets, three on wide screens
 - **Dark mode** — follows OS preference via CSS variables
 - **Accessible modals** — Escape-to-close, focus management, backdrop dismiss
 - **Deployed** — Vercel (frontend) + Render (backend) + Supabase (managed Postgres)
