@@ -16,6 +16,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>QuoteMe</title>
         <meta name="description" content="Save the quotes that stay with you: tag them, add notes, and come back to them anytime." />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        {/* app install: the manifest (public/manifest.webmanifest), the iPhone home screen icon and name, and the top bar color in light and dark mode */}
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-title" content="QuoteMe" />
+        {/* each theme-color needs its own key, or next/head keeps only the last one */}
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" key="theme-color-light" />
+        <meta name="theme-color" content="#18181b" media="(prefers-color-scheme: dark)" key="theme-color-dark" />
       </Head>
       <Navbar />
       <div className="flex-1 flex flex-col">
