@@ -19,6 +19,7 @@ QuoteMe is a full-stack web app for building a personal collection of quotes. Si
 - **Progressive disclosure**: tags show on every card, and notes hide behind a "Show notes" toggle so cards stay short
 - **Delete confirmation**: deleting a quote asks first, so nothing is lost by accident
 - **Responsive layout**: one column on phones, two on tablets, three on wide screens
+- **Installable app**: add QuoteMe to your phone's home screen and it opens full screen with its own icon (web app manifest, no extra packages)
 - **Dark mode** — follows OS preference via CSS variables
 - **Accessible modals** — Escape-to-close, focus management, backdrop dismiss
 - **Deployed** — Vercel (frontend) + Render (backend) + Supabase (managed Postgres)
